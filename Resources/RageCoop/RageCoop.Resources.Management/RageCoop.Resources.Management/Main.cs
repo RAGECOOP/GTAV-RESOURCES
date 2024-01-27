@@ -1,8 +1,7 @@
-﻿using RageCoop.Server.Scripting;
-
+﻿using RageCoop.Core;
 // Optional
 using RageCoop.Server;
-using RageCoop.Core;
+using RageCoop.Server.Scripting;
 using System.Net;
 
 namespace RageCoop.Resources.Management
@@ -14,19 +13,19 @@ namespace RageCoop.Resources.Management
         {
             Util.Init(Logger);
             API.RegisterCommands(this);
-            ManagementStore=new ManagementStore(Path.Combine(CurrentResource.DataFolder),Logger);
+            ManagementStore = new ManagementStore(Path.Combine(CurrentResource.DataFolder), Logger);
             API.Logger.Info("Loaded management database");
-            API.Events.OnPlayerHandshake+=(s, e) =>
+            API.Events.OnPlayerHandshake += (s, e) =>
             {
                 string bannedReason = ManagementStore.GetBanned(e.EndPoint.Address.ToString());
                 var m = ManagementStore.GetMember(e.Username);
-                if (bannedReason!=null)
+                if (bannedReason != null)
                 {
-                    e.Deny("You're banned: "+bannedReason);
+                    e.Deny("You're banned: " + bannedReason);
                 }
-                else if (m!=null)
+                else if (m != null)
                 {
-                    if (e.PasswordHash!=m.PassHash)
+                    if (e.PasswordHash != m.PassHash)
                     {
                         e.Deny("Authentication failed!");
                     }
@@ -36,7 +35,7 @@ namespace RageCoop.Resources.Management
                     e.Deny("You're not authorized");
                 }
             };
-            API.Events.OnCommandReceived+=FilterCommand;
+            API.Events.OnCommandReceived += FilterCommand;
         }
 
         [Command("ban")]
@@ -45,7 +44,7 @@ namespace RageCoop.Resources.Management
             if (HasPermission(ctx.Client, PermissionFlags.Ban))
             {
                 var username = ctx.Args[0];
-                if(IPEndPoint.TryParse(username,out var p))
+                if (IPEndPoint.TryParse(username, out var p))
                 {
                     ManagementStore.Ban(p.Address.ToString(), username, ctx.Args.Length >= 2 ? ctx.Args[1] : "Unspecified");
                     API.SendChatMessage($"{username} was banned");
@@ -89,7 +88,7 @@ namespace RageCoop.Resources.Management
         [Command("unban")]
         public void Unban(CommandContext ctx)
         {
-            if (ctx.Args.Length<1) { return; }
+            if (ctx.Args.Length < 1) { return; }
             var name = ctx.Args[0];
             if (!HasPermission(ctx.Client, PermissionFlags.Ban))
             {
@@ -100,8 +99,8 @@ namespace RageCoop.Resources.Management
             {
                 try
                 {
-                    ManagementStore.Unban(name,out var unbanned);
-                    API.SendChatMessage($"{string.Join(',',unbanned)} was unbanned.");
+                    ManagementStore.Unban(name, out var unbanned);
+                    API.SendChatMessage($"{string.Join(',', unbanned)} was unbanned.");
                 }
                 catch (Exception ex)
                 {
@@ -113,14 +112,14 @@ namespace RageCoop.Resources.Management
         [Command("register")]
         public void Register(CommandContext ctx)
         {
-            if (ctx.Args.Length<2) { return; }
-            else if (ctx.Client !=null && !HasPermission(ctx.Client, PermissionFlags.Register))
+            if (ctx.Args.Length < 2) { return; }
+            else if (ctx.Client != null && !HasPermission(ctx.Client, PermissionFlags.Register))
             {
                 return;
             }
             var name = ctx.Args[0];
             var pass = ctx.Args[1];
-            if (ManagementStore.Config.DefaultRole==null || ManagementStore.Config.DefaultRole.ToLower()=="guest") { return; }
+            if (ManagementStore.Config.DefaultRole == null || ManagementStore.Config.DefaultRole.ToLower() == "guest") { return; }
             if (ManagementStore.UpdateMember(name, pass.GetSHA256Hash().ToHexString(), ManagementStore.Config.DefaultRole))
             {
                 ctx.Client.Message("Updated user info: " + name);
@@ -135,13 +134,13 @@ namespace RageCoop.Resources.Management
         public void Unregister(CommandContext ctx)
         {
             string name;
-            if (ctx.Args.Length==0)
+            if (ctx.Args.Length == 0)
             {
-                name=ctx.Client.Username;
+                name = ctx.Client.Username;
             }
             else if (HasPermission(ctx.Client, PermissionFlags.All))
             {
-                name= ctx.Args[0];
+                name = ctx.Args[0];
             }
             else
             {
@@ -162,11 +161,11 @@ namespace RageCoop.Resources.Management
         {
             if (HasPermission(ctx.Client, PermissionFlags.Kick))
             {
-                if (ctx.Args.Length<1) { return; }
+                if (ctx.Args.Length < 1) { return; }
                 var reason = "EAT POOP!";
-                if (ctx.Args.Length>=2) { reason=ctx.Args[1]; }
+                if (ctx.Args.Length >= 2) { reason = ctx.Args[1]; }
                 var c = API.GetClientByUsername(ctx.Args[0]);
-                if (c!=null)
+                if (c != null)
                 {
                     c.Kick(reason);
                     API.SendChatMessage($"{c.Username} was kicked");
@@ -185,17 +184,17 @@ namespace RageCoop.Resources.Management
         [Command("setrole")]
         public void SetRole(CommandContext ctx)
         {
-            if (ctx!=null && !HasPermission(ctx.Client, PermissionFlags.All))
+            if (ctx != null && !HasPermission(ctx.Client, PermissionFlags.All))
             {
                 ctx.Client.Message("You don't have permission to perform this operation");
                 return;
             }
-            if (ctx.Args.Length<2) { return;}
+            if (ctx.Args.Length < 2) { return; }
             var name = ctx.Args[0];
-            var role=ctx.Args[1];
+            var role = ctx.Args[1];
             if (ManagementStore.Config.Roles.ContainsKey(role) && ManagementStore.SetRole(name, role))
             {
-                ctx.Client.Message("Successfully updated role for member: "+name);
+                ctx.Client.Message("Successfully updated role for member: " + name);
             }
             else
             {
@@ -207,39 +206,39 @@ namespace RageCoop.Resources.Management
 
             Member m;
             Role r;
-            if (e.Client==null)
+            if (e.Client == null)
             {
                 // Sent by server
                 return;
             }
-            if ((m=ManagementStore.GetMember(e.Client.Username))!=null)
+            if ((m = ManagementStore.GetMember(e.Client.Username)) != null)
             {
                 if (ManagementStore.Config.Roles.TryGetValue(m.Role, out r))
                 {
-                    if (r.CommandFilteringMode==0)
+                    if (r.CommandFilteringMode == 0)
                     {
-                        e.Cancel=!r.WhiteListedCommands.Contains(e.Name);
+                        e.Cancel = !r.WhiteListedCommands.Contains(e.Name);
                     }
                     else
                     {
-                        e.Cancel=r.BlackListedCommands.Contains(e.Name);
+                        e.Cancel = r.BlackListedCommands.Contains(e.Name);
                     }
                 }
             }
             else if (ManagementStore.Config.AllowGuest && ManagementStore.Config.Roles.TryGetValue("Guest", out r))
             {
-                if (r.CommandFilteringMode==0)
+                if (r.CommandFilteringMode == 0)
                 {
-                    e.Cancel=!r.WhiteListedCommands.Contains(e.Name);
+                    e.Cancel = !r.WhiteListedCommands.Contains(e.Name);
                 }
                 else
                 {
-                    e.Cancel=r.BlackListedCommands.Contains(e.Name);
+                    e.Cancel = r.BlackListedCommands.Contains(e.Name);
                 }
             }
             else
             {
-                e.Cancel=true;
+                e.Cancel = true;
             }
             if (e.Cancel)
             {
@@ -248,10 +247,10 @@ namespace RageCoop.Resources.Management
         }
         private bool HasPermission(Client sender, PermissionFlags permission)
         {
-            if (sender==null) { return true; };
+            if (sender == null) { return true; };
             Member m;
             Role r;
-            if ((m=ManagementStore.GetMember(sender.Username))!=null)
+            if ((m = ManagementStore.GetMember(sender.Username)) != null)
             {
                 if (ManagementStore.Config.Roles.TryGetValue(m.Role.ToString(), out r))
                 {

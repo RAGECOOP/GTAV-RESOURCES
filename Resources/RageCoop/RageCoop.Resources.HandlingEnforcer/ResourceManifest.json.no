@@ -1,0 +1,7 @@
+{
+  "Name": "RageCoop.Resources.HandlingEnforcer",
+  "Description": "Resource to enforce vehicle handling at server side",
+  "ClientResources": ["RageCoop.Resources.HandlingEnforcer.Client/RageCoop.Resources.HandlingEnforcer.Client.csproj"],
+  "ServerResources": ["RageCoop.Resources.HandlingEnforcer/RageCoop.Resources.HandlingEnforcer.csproj"],
+  "Version": "0.4"
+}

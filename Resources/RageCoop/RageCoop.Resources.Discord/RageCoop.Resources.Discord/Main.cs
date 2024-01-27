@@ -1,10 +1,10 @@
-﻿using System.Xml;
-using System.Xml.Serialization;
-using Discord;
+﻿using Discord;
 using Discord.Webhook;
 using Discord.WebSocket;
-using System.Text.RegularExpressions;
 using RageCoop.Server.Scripting;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace RageCoop.Resources.Discord
 {
@@ -127,7 +127,7 @@ namespace RageCoop.Resources.Discord
                 string usr = Regex.Replace(message.Author.Username, @"\p{Cs}", "");
                 string msg = Regex.Replace(message.Content, @"\p{Cs}", "");
                 if (msg.Length > 0)
-                    API.SendChatMessage(msg, null, usr + " [Discord]",false);
+                    API.SendChatMessage(msg, null, usr + " [Discord]", false);
             }
         }
 

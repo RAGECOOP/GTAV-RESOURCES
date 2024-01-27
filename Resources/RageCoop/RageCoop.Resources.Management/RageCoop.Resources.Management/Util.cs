@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using System.Xml;
-using Newtonsoft.Json;
+﻿using RageCoop.Core;
 using RageCoop.Server;
-using RageCoop.Core;
 
 namespace RageCoop.Resources.Management
 {
@@ -20,10 +12,10 @@ namespace RageCoop.Resources.Management
         }
         public static bool HasPermissionFlag(this PermissionFlags flagToCheck, PermissionFlags flag)
         {
-            if(flag == PermissionFlags.All) { return flagToCheck == PermissionFlags.All; }
-            return (flagToCheck & flag)!=0;
+            if (flag == PermissionFlags.All) { return flagToCheck == PermissionFlags.All; }
+            return (flagToCheck & flag) != 0;
         }
-        public static void Message(this Client c,string message)
+        public static void Message(this Client c, string message)
         {
             if (c != null)
             {

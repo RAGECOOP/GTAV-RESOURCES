@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RageCoop.Client.Scripting</name>
+    </assembly>
+    <members>
+        <member name="M:RageCoop.Client.Scripting.APIBridge.StringArrayToMemory(System.String[])">
+            <summary>
+            Copy content of string to a sequential block of memory
+            </summary>
+            <param name="strs"></param>
+            <returns>Pointer to the start of the block, can be used as argv</returns>
+            <remarks>Call <see cref="M:System.Runtime.InteropServices.Marshal.FreeHGlobal(System.IntPtr)"/> with the returned pointer when finished using</remarks>
+        </member>
+        <member name="M:RageCoop.Client.Scripting.APIBridge.InvokeCommandAsJson(System.String,System.Object[])">
+            <summary>
+            Invoke command and get the return value as json
+            </summary>
+            <param name="name"></param>
+            <param name="args"></param>
+            <returns>The json representation of returned object</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="T:RageCoop.Client.Scripting.ClientResource">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:RageCoop.Client.Scripting.ClientResource.Name">
+            <summary>
+                Name of the resource
+            </summary>
+        </member>
+        <member name="P:RageCoop.Client.Scripting.ClientResource.ScriptsDirectory">
+            <summary>
+                Directory where the scripts is loaded from
+            </summary>
+        </member>
+        <member name="P:RageCoop.Client.Scripting.ClientResource.DataFolder">
+            <summary>
+                A resource-specific folder that can be used to store your files.
+            </summary>
+        </member>
+        <member name="P:RageCoop.Client.Scripting.ClientResource.Files">
+            <summary>
+                Get the <see cref="T:RageCoop.Client.Scripting.ClientFile" /> where this script is loaded from.
+            </summary>
+        </member>
+        <member name="P:RageCoop.Client.Scripting.ClientResource.Logger">
+            <summary>
+                A <see cref="T:RageCoop.Core.Logger" /> instance that can be used to debug your resource.
+            </summary>
+        </member>
+        <member name="P:RageCoop.Client.Scripting.ClientScript.CurrentFile">
+            <summary>
+                Get the <see cref="T:RageCoop.Client.Scripting.ClientFile" /> instance where this script is loaded from.
+            </summary>
+        </member>
+        <member name="P:RageCoop.Client.Scripting.ClientScript.CurrentResource">
+            <summary>
+                Get the <see cref="T:RageCoop.Client.Scripting.ClientResource" /> that this script belongs to.
+            </summary>
+        </member>
+        <member name="P:RageCoop.Client.Scripting.ClientScript.Logger">
+            <summary>
+                Eqivalent of <see cref="P:RageCoop.Client.Scripting.ClientResource.Logger" /> in <see cref="P:RageCoop.Client.Scripting.ClientScript.CurrentResource" />
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using System;
 using System.Xml;
-using GTA;
-using Newtonsoft.Json;
 
 namespace RageCoop.Resources.HandlingEnforcer.Client
 {
     internal struct Vector3
     {
         public float X, Y, Z;
-        public static implicit operator Vector3(GTA.Math.Vector3 v) =>new Vector3() { X=v.X,Y=v.Y,Z=v.Z};
-        public static implicit operator GTA.Math.Vector3(Vector3 v) => new GTA.Math.Vector3() { X=v.X, Y=v.Y, Z=v.Z };
+        public static implicit operator Vector3(GTA.Math.Vector3 v) => new Vector3() { X = v.X, Y = v.Y, Z = v.Z };
+        public static implicit operator GTA.Math.Vector3(Vector3 v) => new GTA.Math.Vector3() { X = v.X, Y = v.Y, Z = v.Z };
 
     }
     internal class HandlingData
@@ -24,7 +19,7 @@ namespace RageCoop.Resources.HandlingEnforcer.Client
         }
         private HandlingData(XmlNode node)
         {
-            foreach(XmlNode n in node.ChildNodes)
+            foreach (XmlNode n in node.ChildNodes)
             {
                 switch (n.Name)
                 {
@@ -152,73 +147,74 @@ namespace RageCoop.Resources.HandlingEnforcer.Client
             }
 
             // Due to mismatched values between SHVDN and handling.meta
-            AntiRollBarBiasFront*=2;
-            SuspensionBiasFront*=2;
-            TractionBiasFront*=2;
-            SuspensionCompressionDamping/=10;
-            SuspensionReboundDamping/=10;
-            SteeringLock/=57.29577f;
-            TractionLossMultiplier/=100;
+            AntiRollBarBiasFront *= 2;
+            SuspensionBiasFront *= 2;
+            TractionBiasFront *= 2;
+            SuspensionCompressionDamping /= 10;
+            SuspensionReboundDamping /= 10;
+            SteeringLock /= 57.29577f;
+            TractionLossMultiplier /= 100;
         }
-        public HandlingData(GTA.HandlingData h,int hash)
+        public HandlingData(GTA.HandlingData h, int hash)
         {
-            Hash=hash;
+            Hash = hash;
             AntiRollBarBiasFront = h.AntiRollBarBiasFront;
             AntiRollBarForce = h.AntiRollBarForce;
             BrakeForce = h.BrakeForce;
-            CamberStiffness=h.CamberStiffness;
-            CenterOfMassOffset=h.CenterOfMassOffset;
+            CamberStiffness = h.CamberStiffness;
+            CenterOfMassOffset = h.CenterOfMassOffset;
             ClutchChangeRateScaleDownShift = h.ClutchChangeRateScaleDownShift;
             ClutchChangeRateScaleUpShift = h.ClutchChangeRateScaleUpShift;
             CollisionDamageMultiplier = h.CollisionDamageMultiplier;
             DeformationDamageMultiplier = h.DeformationDamageMultiplier;
-            DriveInertia=h.DriveInertia;
+            DriveInertia = h.DriveInertia;
             EngineDamageMultiplier = h.EngineDamageMultiplier;
-            HandBrakeForce =h.HandBrakeForce;
-            InertiaMultiplier=h.InertiaMultiplier;
-            InitialDriveForce=h.InitialDriveForce;
-            InitialDriveGears=h.InitialDriveGears;
-            Mass=h.Mass;
-            MonetaryValue=h.MonetaryValue;
-            OilVolume=h.OilVolume;
-            PercentSubmerged=h.PercentSubmerged;
-            PetrolTankVolume=h.PetrolTankVolume;
-            RollCenterHeightFront=h.RollCenterHeightFront;
-            RollCenterHeightRear=h.RollCenterHeightRear;
-            SeatOffsetDistanceX=h.SeatOffsetDistanceX;
-            SeatOffsetDistanceY=h.SeatOffsetDistanceY;
-            SeatOffsetDistanceZ=h.SeatOffsetDistanceZ;
-            SteeringLock=h.SteeringLock;
-            SuspensionBiasFront=h.SuspensionBiasFront;
-            SuspensionCompressionDamping=h.SuspensionCompressionDamping;
-            SuspensionForce=h.SuspensionForce;
-            SuspensionLowerLimit=h.SuspensionLowerLimit;
-            SuspensionRaise=h.SuspensionRaise;
-            SuspensionReboundDamping=h.SuspensionReboundDamping;
-            SuspensionUpperLimit=h.SuspensionUpperLimit;
-            TractionBiasFront=h.TractionBiasFront;
-            TractionCurveMax=h.TractionCurveMax;
-            TractionCurveMin=h.TractionCurveMin;
-            TractionLossMultiplier=h.TractionLossMultiplier;
-            TractionSpringDeltaMax=h.TractionSpringDeltaMax;
-            WeaponDamageMultiplier=h.WeaponDamageMultiplier;
-            BoostMaxSpeed=h.BoostMaxSpeed;
-            BrakeBiasFront=h.BrakeBiasFront;
-            DownForceModifier=h.DownForceModifier;
-            InitialDragCoefficient=h.InitialDragCoefficient;
-            InitialDriveMaxFlatVelocity=h.InitialDriveMaxFlatVelocity;
-            LowSpeedTractionLossMultiplier=h.LowSpeedTractionLossMultiplier;
-            PopUpLightRotation=h.PopUpLightRotation;
-            RocketBoostCapacity=h.RocketBoostCapacity;
-            TractionCurveLateral=h.TractionCurveLateral;
+            HandBrakeForce = h.HandBrakeForce;
+            InertiaMultiplier = h.InertiaMultiplier;
+            InitialDriveForce = h.InitialDriveForce;
+            InitialDriveGears = h.InitialDriveGears;
+            Mass = h.Mass;
+            MonetaryValue = h.MonetaryValue;
+            OilVolume = h.OilVolume;
+            PercentSubmerged = h.PercentSubmerged;
+            PetrolTankVolume = h.PetrolTankVolume;
+            RollCenterHeightFront = h.RollCenterHeightFront;
+            RollCenterHeightRear = h.RollCenterHeightRear;
+            SeatOffsetDistanceX = h.SeatOffsetDistanceX;
+            SeatOffsetDistanceY = h.SeatOffsetDistanceY;
+            SeatOffsetDistanceZ = h.SeatOffsetDistanceZ;
+            SteeringLock = h.SteeringLock;
+            SuspensionBiasFront = h.SuspensionBiasFront;
+            SuspensionCompressionDamping = h.SuspensionCompressionDamping;
+            SuspensionForce = h.SuspensionForce;
+            SuspensionLowerLimit = h.SuspensionLowerLimit;
+            SuspensionRaise = h.SuspensionRaise;
+            SuspensionReboundDamping = h.SuspensionReboundDamping;
+            SuspensionUpperLimit = h.SuspensionUpperLimit;
+            TractionBiasFront = h.TractionBiasFront;
+            TractionCurveMax = h.TractionCurveMax;
+            TractionCurveMin = h.TractionCurveMin;
+            TractionLossMultiplier = h.TractionLossMultiplier;
+            TractionSpringDeltaMax = h.TractionSpringDeltaMax;
+            WeaponDamageMultiplier = h.WeaponDamageMultiplier;
+            BoostMaxSpeed = h.BoostMaxSpeed;
+            BrakeBiasFront = h.BrakeBiasFront;
+            DownForceModifier = h.DownForceModifier;
+            InitialDragCoefficient = h.InitialDragCoefficient;
+            InitialDriveMaxFlatVelocity = h.InitialDriveMaxFlatVelocity;
+            LowSpeedTractionLossMultiplier = h.LowSpeedTractionLossMultiplier;
+            PopUpLightRotation = h.PopUpLightRotation;
+            RocketBoostCapacity = h.RocketBoostCapacity;
+            TractionCurveLateral = h.TractionCurveLateral;
         }
-        Vector3 ToVec(XmlNode n)
+
+        private Vector3 ToVec(XmlNode n)
         {
             return new Vector3()
             {
-                X=float.Parse(n.Attributes["x"].Value),
-                Y=float.Parse(n.Attributes["x"].Value),
-                Z=float.Parse(n.Attributes["x"].Value),
+                X = float.Parse(n.Attributes["x"].Value),
+                Y = float.Parse(n.Attributes["x"].Value),
+                Z = float.Parse(n.Attributes["x"].Value),
             };
         }
         public void ApplyTo(GTA.HandlingData h)
@@ -226,51 +222,51 @@ namespace RageCoop.Resources.HandlingEnforcer.Client
             h.AntiRollBarBiasFront = AntiRollBarBiasFront;
             h.AntiRollBarForce = AntiRollBarForce;
             h.BrakeForce = BrakeForce;
-            h.CamberStiffness=CamberStiffness;
-            h.CenterOfMassOffset=CenterOfMassOffset;
+            h.CamberStiffness = CamberStiffness;
+            h.CenterOfMassOffset = CenterOfMassOffset;
             h.ClutchChangeRateScaleDownShift = ClutchChangeRateScaleDownShift;
             h.ClutchChangeRateScaleUpShift = ClutchChangeRateScaleUpShift;
             h.CollisionDamageMultiplier = CollisionDamageMultiplier;
             h.DeformationDamageMultiplier = DeformationDamageMultiplier;
-            h.DriveInertia=DriveInertia;
+            h.DriveInertia = DriveInertia;
             h.EngineDamageMultiplier = EngineDamageMultiplier;
             h.HandBrakeForce = HandBrakeForce;
-            h.InertiaMultiplier=InertiaMultiplier;
-            h.InitialDriveForce=InitialDriveForce;
-            h.InitialDriveGears=InitialDriveGears;
-            h.Mass=Mass;
-            h.MonetaryValue=MonetaryValue;
-            h.OilVolume=OilVolume;
-            h.PercentSubmerged=PercentSubmerged;
-            h.PetrolTankVolume=PetrolTankVolume;
-            h.RollCenterHeightFront=RollCenterHeightFront;
-            h.RollCenterHeightRear=RollCenterHeightRear;
-            h.SeatOffsetDistanceX=SeatOffsetDistanceX;
-            h.SeatOffsetDistanceY=SeatOffsetDistanceY;
-            h.SeatOffsetDistanceZ=SeatOffsetDistanceZ;
-            h.SteeringLock=SteeringLock;
-            h.SuspensionBiasFront=SuspensionBiasFront;
-            h.SuspensionCompressionDamping=SuspensionCompressionDamping;
-            h.SuspensionForce=SuspensionForce;
-            h.SuspensionLowerLimit=SuspensionLowerLimit;
-            h.SuspensionRaise=SuspensionRaise;
-            h.SuspensionReboundDamping=SuspensionReboundDamping;
-            h.SuspensionUpperLimit=SuspensionUpperLimit;
-            h.TractionBiasFront=TractionBiasFront;
-            h.TractionCurveMax=TractionCurveMax;
-            h.TractionCurveMin=TractionCurveMin;
-            h.TractionLossMultiplier=TractionLossMultiplier;
-            h.TractionSpringDeltaMax=TractionSpringDeltaMax;
-            h.WeaponDamageMultiplier=WeaponDamageMultiplier;
-            h.BoostMaxSpeed=BoostMaxSpeed;
-            h.BrakeBiasFront=BrakeBiasFront;
-            h.DownForceModifier=DownForceModifier;
-            h.InitialDragCoefficient=InitialDragCoefficient;
-            h.InitialDriveMaxFlatVelocity=InitialDriveMaxFlatVelocity;
-            h.LowSpeedTractionLossMultiplier=LowSpeedTractionLossMultiplier;
-            h.PopUpLightRotation=PopUpLightRotation;
-            h.RocketBoostCapacity=RocketBoostCapacity;
-            h.TractionCurveLateral=TractionCurveLateral;
+            h.InertiaMultiplier = InertiaMultiplier;
+            h.InitialDriveForce = InitialDriveForce;
+            h.InitialDriveGears = InitialDriveGears;
+            h.Mass = Mass;
+            h.MonetaryValue = MonetaryValue;
+            h.OilVolume = OilVolume;
+            h.PercentSubmerged = PercentSubmerged;
+            h.PetrolTankVolume = PetrolTankVolume;
+            h.RollCenterHeightFront = RollCenterHeightFront;
+            h.RollCenterHeightRear = RollCenterHeightRear;
+            h.SeatOffsetDistanceX = SeatOffsetDistanceX;
+            h.SeatOffsetDistanceY = SeatOffsetDistanceY;
+            h.SeatOffsetDistanceZ = SeatOffsetDistanceZ;
+            h.SteeringLock = SteeringLock;
+            h.SuspensionBiasFront = SuspensionBiasFront;
+            h.SuspensionCompressionDamping = SuspensionCompressionDamping;
+            h.SuspensionForce = SuspensionForce;
+            h.SuspensionLowerLimit = SuspensionLowerLimit;
+            h.SuspensionRaise = SuspensionRaise;
+            h.SuspensionReboundDamping = SuspensionReboundDamping;
+            h.SuspensionUpperLimit = SuspensionUpperLimit;
+            h.TractionBiasFront = TractionBiasFront;
+            h.TractionCurveMax = TractionCurveMax;
+            h.TractionCurveMin = TractionCurveMin;
+            h.TractionLossMultiplier = TractionLossMultiplier;
+            h.TractionSpringDeltaMax = TractionSpringDeltaMax;
+            h.WeaponDamageMultiplier = WeaponDamageMultiplier;
+            h.BoostMaxSpeed = BoostMaxSpeed;
+            h.BrakeBiasFront = BrakeBiasFront;
+            h.DownForceModifier = DownForceModifier;
+            h.InitialDragCoefficient = InitialDragCoefficient;
+            h.InitialDriveMaxFlatVelocity = InitialDriveMaxFlatVelocity;
+            h.LowSpeedTractionLossMultiplier = LowSpeedTractionLossMultiplier;
+            h.PopUpLightRotation = PopUpLightRotation;
+            h.RocketBoostCapacity = RocketBoostCapacity;
+            h.TractionCurveLateral = TractionCurveLateral;
         }
         public float BoostMaxSpeed;
         public float BrakeBiasFront;
@@ -338,9 +334,9 @@ namespace RageCoop.Resources.HandlingEnforcer.Client
 
             return new GTA.Math.Vector3()
             {
-                X=(float)reader.ReadAsDouble(),
-                Y=(float)reader.ReadAsDouble(),
-                Z=(float)reader.ReadAsDouble(),
+                X = (float)reader.ReadAsDouble(),
+                Y = (float)reader.ReadAsDouble(),
+                Z = (float)reader.ReadAsDouble(),
             };
         }
     }

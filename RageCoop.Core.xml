@@ -4,230 +4,398 @@
         <name>RageCoop.Core</name>
     </assembly>
     <members>
+        <member name="P:RageCoop.Core.Buffer.Size">
+            <summary>
+            Size of this buffer in memory
+            </summary>
+        </member>
+        <member name="P:RageCoop.Core.Buffer.Position">
+            <summary>
+            The current read/write index
+            </summary>
+        </member>
+        <member name="P:RageCoop.Core.Buffer.Address">
+            <summary>
+            Pointer to the start of this buffer
+            </summary>
+        </member>
+        <member name="M:RageCoop.Core.Buffer.Alloc(System.Int32)">
+            <summary>
+            Ensure memory safety and advance position by specified number of bytes
+            </summary>
+            <param name="cbSize"></param>
+            <returns>Pointer to the current position in the buffer</returns>
+        </member>
+        <member name="M:RageCoop.Core.Buffer.Reset">
+            <summary>
+            Reset position to the start of this buffer
+            </summary>
+        </member>
+        <member name="F:RageCoop.Core.BufferWriter.ThreadLocal">
+            <summary>
+            Gets a thread local instance of this writer
+            </summary>
+        </member>
+        <member name="M:RageCoop.Core.BufferWriter.WriteVal``1(``0)">
+            <summary>
+            For passing struct smaller than word size (4/8 bytes on 32/64 bit system)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+        </member>
+        <member name="M:RageCoop.Core.BufferWriter.WriteArray``1(``0[])">
+            <summary>
+            Write an array, prefix the data with its length so it can latter be read using <see cref="M:RageCoop.Core.BufferReader.ReadArray``1"/>
+            </summary>
+        </member>
+        <member name="M:RageCoop.Core.BufferWriter.ToByteArray(System.Int32)">
+            <summary>
+            Allocate a byte array on managed heap and copy the data of specified size to it 
+            </summary>
+            <param name="cbSize"></param>
+            <returns>The newly created managed byte array</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:RageCoop.Core.BufferWriter.Free">
+            <summary>
+            Free the associated memory allocated on the unmanaged heap
+            </summary>
+        </member>
+        <member name="F:RageCoop.Core.BufferReader.ThreadLocal">
+            <summary>
+            Gets a thread local instance of this reader
+            </summary>
+        </member>
+        <member name="M:RageCoop.Core.BufferReader.#ctor">
+            <summary>
+            Initialize an empty instance, needs to call <see cref="M:RageCoop.Core.BufferReader.Initialise(System.Byte*,System.Int32)"/> before reading data
+            </summary>
+        </member>
+        <member name="M:RageCoop.Core.BufferReader.Read``1(System.Span{``0})">
+            <summary>
+            Read a span of type <typeparamref name="T"/> from current position to <paramref name="destination"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="destination"></param>
+        </member>
+        <member name="M:RageCoop.Core.BufferReader.ReadArray``1">
+            <summary>
+            Reads an array previously written using <see cref="M:RageCoop.Core.BufferWriter.WriteArray``1(``0[])"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:RageCoop.Core.CoreUtils.GetLocalAddress">
+            <summary>
+                Get local ip addresses on all network interfaces
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RageCoop.Core.CoreUtils.JoaatHash(System.String)">
+            <summary>
+                Generate jenkins one-at-a-time hash from specified string (lower)
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="M:RageCoop.Core.Extensions.GetBytes(GTA.Math.Quaternion)">
             <summary>
-            
             </summary>
             <param name="qua"></param>
             <returns>An array of bytes with length 16</returns>
         </member>
         <member name="T:RageCoop.Core.PublicExtensions">
             <summary>
-            Some extension methods provided by RageCoop
+                Some extension methods provided by RageCoop
             </summary>
         </member>
         <member name="M:RageCoop.Core.PublicExtensions.GetSHA256Hash(System.String)">
             <summary>
-            Get a SHA256 hashed byte array of the input string, internally used to hash password at client side.
+                Get a SHA256 hashed byte array of the input string, internally used to hash password at client side.
             </summary>
             <param name="inputString"></param>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Core.PublicExtensions.ToHexString(System.Byte[])">
             <summary>
-            Convert a byte array to hex-encoded string, internally used to trigger handshake event
+                Convert a byte array to hex-encoded string, internally used to trigger handshake event
             </summary>
             <param name="data"></param>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Core.PublicExtensions.ToIP(System.String)">
             <summary>
-            Convert a string to IP address
+                Convert a string to IP address
             </summary>
             <param name="ip"></param>
             <returns></returns>
         </member>
         <member name="T:RageCoop.Core.Logger">
             <summary>
-            
+            </summary>
+        </member>
+        <member name="F:RageCoop.Core.Logger.UseUtc">
+            <summary>
+                Whether to use UTC time for timestamping the log
             </summary>
         </member>
         <member name="F:RageCoop.Core.Logger.LogLevel">
             <summary>
-            0:Trace, 1:Debug, 2:Info, 3:Warning, 4:Error
+                0:Trace, 1:Debug, 2:Info, 3:Warning, 4:Error
             </summary>
         </member>
-        <member name="P:RageCoop.Core.Logger.Name">
+        <member name="F:RageCoop.Core.Logger.Name">
             <summary>
-            Name of this logger
+                Name of this logger
             </summary>
         </member>
-        <member name="F:RageCoop.Core.Logger.LogPath">
+        <member name="M:RageCoop.Core.Logger.Dispose">
             <summary>
-            Path to log file.
-            </summary>
-        </member>
-        <member name="F:RageCoop.Core.Logger.UseConsole">
-            <summary>
-            Whether to flush messages to console instead of log file
+                Stop backdround thread and flush all pending messages.
             </summary>
         </member>
         <member name="M:RageCoop.Core.Logger.Info(System.String)">
             <summary>
-            
             </summary>
             <param name="message"></param>
         </member>
         <member name="M:RageCoop.Core.Logger.Warning(System.String)">
             <summary>
-            
             </summary>
             <param name="message"></param>
         </member>
         <member name="M:RageCoop.Core.Logger.Error(System.String)">
             <summary>
-            
             </summary>
             <param name="message"></param>
         </member>
         <member name="M:RageCoop.Core.Logger.Error(System.String,System.Exception)">
             <summary>
-            
             </summary>
             <param name="message"></param>
             <param name="error"></param>
         </member>
         <member name="M:RageCoop.Core.Logger.Error(System.Exception)">
             <summary>
-            
             </summary>
             <param name="ex"></param>
         </member>
         <member name="M:RageCoop.Core.Logger.Debug(System.String)">
             <summary>
-            
             </summary>
             <param name="message"></param>
         </member>
         <member name="M:RageCoop.Core.Logger.Trace(System.String)">
             <summary>
-            
             </summary>
             <param name="message"></param>
         </member>
         <member name="M:RageCoop.Core.Logger.Flush">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="M:RageCoop.Core.Logger.Dispose">
-            <summary>
-            Stop backdround thread and flush all pending messages.
             </summary>
         </member>
         <member name="M:RageCoop.Core.MathExtensions.ToVector(GTA.Math.Quaternion)">
             <summary>
-            
             </summary>
         </member>
         <member name="M:RageCoop.Core.MathExtensions.ToQuaternion(GTA.Math.Vector3,System.Single)">
             <summary>
-            
             </summary>
         </member>
         <member name="M:RageCoop.Core.CoopPeer.Dispose">
             <summary>
-            Terminate all connections and background thread
+                Terminate all connections and background thread
+            </summary>
+        </member>
+        <member name="T:RageCoop.Core.ServerInfo">
+            <summary>
+                A json object representing a server's information as annouced to master server.
             </summary>
         </member>
         <member name="P:RageCoop.Core.Packets.HolePunch.Status">
             <summary>
-            1:initial, 2:acknowledged, 3:confirmed
+                1:initial, 2:acknowledged, 3:confirmed
             </summary>
         </member>
         <member name="T:RageCoop.Core.Packets.ConnectionRequest">
             <summary>
-            Request direct connection to another client
+                Request direct connection to another client
             </summary>
         </member>
         <member name="T:RageCoop.Core.Packets.P2PConnect">
             <summary>
-            Sent to the host when a direct connection has been established
-            </summary>
-        </member>
-        <member name="F:RageCoop.Core.Packets.Handshake.AesKeyCrypted">
-            <summary>
-            The asymetrically crypted Aes key
+                Sent to the host when a direct connection has been established
             </summary>
         </member>
         <member name="F:RageCoop.Core.Packets.Handshake.AesIVCrypted">
             <summary>
-            The asymetrically crypted Aes IV
+                The asymetrically crypted Aes IV
+            </summary>
+        </member>
+        <member name="F:RageCoop.Core.Packets.Handshake.AesKeyCrypted">
+            <summary>
+                The asymetrically crypted Aes key
             </summary>
         </member>
         <member name="P:RageCoop.Core.Packets.Handshake.PasswordEncrypted">
             <summary>
-            The password hash with client Aes
+                The password hash with client Aes
             </summary>
         </member>
         <member name="P:RageCoop.Core.Packets.PlayerInfoUpdate.PedID">
             <summary>
-            Ped ID for this Player
+                Ped ID for this Player
             </summary>
         </member>
-        <member name="T:RageCoop.Core.Scripting.CustomEvents">
+        <member name="T:RageCoop.Core.Scripting.CustomEventReceivedArgs">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:RageCoop.Core.Scripting.CustomEventReceivedArgs.Hash">
+            <summary>
+                The event hash
+            </summary>
+        </member>
+        <member name="P:RageCoop.Core.Scripting.CustomEventReceivedArgs.Args">
+            <summary>
+                Supported types: byte, short, ushort, int, uint, long, ulong, float, bool, string, Vector3, Quaternion
+            </summary>
+        </member>
+        <member name="M:RageCoop.Core.Scripting.CustomEventHandler.Invoke(System.Int32,System.Byte*,System.Int32,System.Object)">
             <summary>
             
             </summary>
+            <param name="hash"></param>
+            <param name="data"></param>
+            <param name="cbData"></param>
+            <param name="tag">Only works when using <see cref="T:RageCoop.Core.Scripting.CustomEventReceivedArgs"/></param>
         </member>
-        <member name="M:RageCoop.Core.Scripting.CustomEvents.Hash(System.String)">
+        <member name="T:RageCoop.Core.Scripting.CustomEventFlags">
             <summary>
-            Get a Int32 hash of a string.
+                Describes how the event should be sent or processed
+            </summary>
+        </member>
+        <member name="F:RageCoop.Core.Scripting.CustomEventFlags.Encrypted">
+            <summary>
+                Data will be encrypted and decrypted on target client
+            </summary>
+        </member>
+        <member name="F:RageCoop.Core.Scripting.CustomEventFlags.Queued">
+            <summary>
+                Event will be queued and fired in script thread, specify this flag if your handler will call native functions.
+            </summary>
+        </member>
+        <member name="T:RageCoop.Core.Scripting.CustomEventHash">
+            <summary>
+                Struct to identify different event using hash
+            </summary>
+        </member>
+        <member name="F:RageCoop.Core.Scripting.CustomEventHash.Hash">
+            <summary>
+                Hash value
+            </summary>
+        </member>
+        <member name="M:RageCoop.Core.Scripting.CustomEventHash.op_Implicit(System.Int32)~RageCoop.Core.Scripting.CustomEventHash">
+            <summary>
+                Create from hash
+            </summary>
+            <param name="hash"></param>
+        </member>
+        <member name="M:RageCoop.Core.Scripting.CustomEventHash.op_Implicit(System.String)~RageCoop.Core.Scripting.CustomEventHash">
+            <summary>
+                Create from string
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:RageCoop.Core.Scripting.CustomEventHash.FromString(System.String)">
+            <summary>
+                Get a Int32 hash of a string.
             </summary>
             <param name="s"></param>
             <returns></returns>
-            <exception cref="T:System.ArgumentException">The exception is thrown when the name did not match a previously computed one and the hash was the same.</exception>
+            <exception cref="T:System.ArgumentException">
+                The exception is thrown when the name did not match a previously computed one and
+                the hash was the same.
+            </exception>
+        </member>
+        <member name="M:RageCoop.Core.Scripting.CustomEventHash.op_Implicit(RageCoop.Core.Scripting.CustomEventHash)~System.Int32">
+            <summary>
+                To int
+            </summary>
+            <param name="h"></param>
+        </member>
+        <member name="T:RageCoop.Core.Scripting.CustomEvents">
+            <summary>
+            Common processing for custome client\server events
+            </summary>
         </member>
         <member name="T:RageCoop.Core.Scripting.ResourceFile">
             <summary>
-            
             </summary>
         </member>
         <member name="P:RageCoop.Core.Scripting.ResourceFile.Name">
             <summary>
-            Full name with relative path of this file
+                Full name with relative path of this file
             </summary>
         </member>
         <member name="P:RageCoop.Core.Scripting.ResourceFile.IsDirectory">
             <summary>
-            Whether this is a directory
+                Whether this is a directory
             </summary>
         </member>
         <member name="P:RageCoop.Core.Scripting.ResourceFile.GetStream">
             <summary>
-            Get a stream that can be used to read file content.
+                Get a stream that can be used to read file content.
             </summary>
+        </member>
+        <member name="M:RageCoop.Core.Shared.GetReader(System.Byte*,System.Int32)">
+            <summary>
+            Shortcut to <see cref="F:RageCoop.Core.BufferReader.ThreadLocal"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RageCoop.Core.Shared.GetWriter(System.Boolean)">
+            <summary>
+            Shortcut to <see cref="F:RageCoop.Core.BufferWriter.ThreadLocal"/>
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:RageCoop.Core.Worker">
             <summary>
-            A worker that constantly execute jobs in a background thread.
+                A worker that constantly execute jobs in a background thread.
             </summary>
         </member>
         <member name="P:RageCoop.Core.Worker.Name">
             <summary>
-            Name of the worker
+                Name of the worker
             </summary>
         </member>
         <member name="P:RageCoop.Core.Worker.IsBusy">
             <summary>
-            Whether this worker is busy executing job(s).
+                Whether this worker is busy executing job(s).
+            </summary>
+        </member>
+        <member name="M:RageCoop.Core.Worker.Dispose">
+            <summary>
+                Finish current job and stop the worker.
             </summary>
         </member>
         <member name="M:RageCoop.Core.Worker.QueueJob(System.Action)">
             <summary>
-            Queue a job to be executed
+                Queue a job to be executed
             </summary>
             <param name="work"></param>
         </member>
         <member name="M:RageCoop.Core.Worker.Stop">
             <summary>
-            Finish current job and stop the worker.
+                Finish current job and stop the worker.
             </summary>
         </member>
-        <member name="M:RageCoop.Core.Worker.Dispose">
+        <member name="T:RageCoop.Core.XSpan`1">
             <summary>
-            Finish current job and stop the worker.
+            A light-weight and less restricted implementation of <see cref="T:System.Span`1"/>, gonna be used at some point, maybe?
             </summary>
+            <typeparam name="T"></typeparam>
         </member>
     </members>
 </doc>

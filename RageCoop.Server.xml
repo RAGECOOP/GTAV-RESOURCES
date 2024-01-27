@@ -6,76 +6,76 @@
     <members>
         <member name="T:RageCoop.Server.Client">
             <summary>
-            Represent a player connected to this server.
+                Represent a player connected to this server.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Client.EntitiesCount">
             <summary>
-            Gets the total number of entities owned by this client
+                Gets the total number of entities owned by this client
             </summary>
         </member>
         <member name="P:RageCoop.Server.Client.EndPoint">
             <summary>
-            Th client's IP address and port.
+                Th client's IP address and port.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Client.InternalEndPoint">
             <summary>
-            Internal(LAN) address of this client, used for NAT hole-punching
+                Internal(LAN) address of this client, used for NAT hole-punching
             </summary>
         </member>
         <member name="P:RageCoop.Server.Client.Player">
             <summary>
-            The <see cref="T:RageCoop.Server.Scripting.ServerPed"/> instance representing the client's main character.
+                The <see cref="T:RageCoop.Server.Scripting.ServerPed" /> instance representing the client's main character.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Client.Latency">
             <summary>
-            The client's latency in seconds.
+                The client's latency in seconds.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Client.IsReady">
             <summary>
-            Indicates whether the client has succefully loaded all resources.
+                Indicates whether the client has succefully loaded all resources.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Client.Username">
             <summary>
-            The client's username.
+                The client's username.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Client.EnableAutoRespawn">
             <summary>
-            Gets or sets whether to enable automatic respawn for this client's main ped.
+                Gets or sets whether to enable automatic respawn for this client's main ped.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Client.DisplayNameTag">
             <summary>
-            Gets or sets whether to enable automatic respawn for this client's main ped.
+                Gets or sets whether to enable automatic respawn for this client's main ped.
             </summary>
         </member>
         <member name="M:RageCoop.Server.Client.Kick(System.String)">
             <summary>
-            Kick this client
+                Kick this client
             </summary>
             <param name="reason"></param>
         </member>
         <member name="M:RageCoop.Server.Client.Kick(System.String[])">
             <summary>
-            Kick this client
+                Kick this client
             </summary>
             <param name="reasons">Reasons to kick</param>
         </member>
         <member name="M:RageCoop.Server.Client.SendChatMessage(System.String,System.String)">
             <summary>
-            Send a chat messsage to this client, not visible to others.
+                Send a chat messsage to this client, not visible to others.
             </summary>
             <param name="message"></param>
             <param name="from"></param>
         </member>
         <member name="M:RageCoop.Server.Client.SendNativeCall``1(System.Action{System.Object},GTA.Native.Hash,System.Object[])">
             <summary>
-            Send a native call to client and do a callback when the response received.
+                Send a native call to client and do a callback when the response received.
             </summary>
             <typeparam name="T">Type of the response</typeparam>
             <param name="callBack"></param>
@@ -84,153 +84,155 @@
         </member>
         <member name="M:RageCoop.Server.Client.SendNativeCall(GTA.Native.Hash,System.Object[])">
             <summary>
-            Send a native call to client and ignore it's response.
+                Send a native call to client and ignore it's response.
             </summary>
             <param name="hash"></param>
             <param name="args"></param>
         </member>
-        <member name="M:RageCoop.Server.Client.SendCustomEvent(System.Int32,System.Object[])">
+        <member name="M:RageCoop.Server.Client.SendCustomEvent(RageCoop.Core.Scripting.CustomEventFlags,RageCoop.Core.Scripting.CustomEventHash,System.Object[])">
             <summary>
-            Trigger a CustomEvent for this client
+                Trigger a CustomEvent for this client
             </summary>
-            <param name="hash">An unique identifier of the event, you can use <see cref="M:RageCoop.Core.Scripting.CustomEvents.Hash(System.String)"/> to get it from a string</param>
+            <param name="flags"></param>
+            <param name="hash">An unique identifier of the event</param>
             <param name="args">Arguments</param>
-        </member>
-        <member name="M:RageCoop.Server.Client.SendCustomEventQueued(System.Int32,System.Object[])">
-            <summary>
-            Send a CustomEvent that'll be queued at client side and invoked from script thread
-            </summary>
-            <param name="hash"></param>
-            <param name="args"></param>
         </member>
         <member name="T:RageCoop.Server.Server">
             <summary>
-            The instantiable RageCoop server class
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Server.API">
-            <summary>
-            The API for controlling server and hooking events.
+                The instantiable RageCoop server class
             </summary>
         </member>
         <member name="F:RageCoop.Server.Server.Version">
             <summary>
-            Get the current server version
+                Get the current server version
             </summary>
         </member>
         <member name="M:RageCoop.Server.Server.#ctor(RageCoop.Server.Settings,RageCoop.Core.Logger)">
             <summary>
-            Instantiate a server.
+                Instantiate a server.
             </summary>
             <param name="settings"></param>
             <param name="logger"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
+        <member name="P:RageCoop.Server.Server.API">
+            <summary>
+                The API for controlling server and hooking events.
+            </summary>
+        </member>
         <member name="M:RageCoop.Server.Server.Start">
             <summary>
-            Spawn threads and start the server
+                Spawn threads and start the server
             </summary>
         </member>
         <member name="M:RageCoop.Server.Server.Stop">
             <summary>
-            Terminate threads and stop the server
+                Terminate threads and stop the server
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.ServerEvents">
             <summary>
-            
             </summary>
         </member>
         <member name="E:RageCoop.Server.Scripting.ServerEvents.OnChatMessage">
             <summary>
-            Invoked when a chat message is received.
+                Invoked when a chat message is received.
             </summary>
         </member>
         <member name="E:RageCoop.Server.Scripting.ServerEvents.OnCommandReceived">
             <summary>
-            Will be invoked from main thread before registered handlers
+                Will be invoked from main thread before registered handlers
             </summary>
         </member>
         <member name="E:RageCoop.Server.Scripting.ServerEvents.OnPlayerHandshake">
             <summary>
-            Will be invoked from main thread when a client is attempting to connect, use <see cref="M:RageCoop.Server.Scripting.HandshakeEventArgs.Deny(System.String)"/> to deny the connection request.
+                Will be invoked from main thread when a client is attempting to connect, use
+                <see cref="M:RageCoop.Server.Scripting.HandshakeEventArgs.Deny(System.String)" /> to deny the connection request.
             </summary>
         </member>
         <member name="E:RageCoop.Server.Scripting.ServerEvents.OnPlayerConnected">
             <summary>
-            Will be invoked when a player is connected, but this player might not be ready yet(client resources not loaded), using <see cref="E:RageCoop.Server.Scripting.ServerEvents.OnPlayerReady"/> is recommended.
+                Will be invoked when a player is connected, but this player might not be ready yet(client resources not loaded),
+                using <see cref="E:RageCoop.Server.Scripting.ServerEvents.OnPlayerReady" /> is recommended.
             </summary>
         </member>
         <member name="E:RageCoop.Server.Scripting.ServerEvents.OnPlayerReady">
             <summary>
-            Will be invoked after the client connected and all resources(if any) have been loaded.
+                Will be invoked after the client connected and all resources(if any) have been loaded.
             </summary>
         </member>
         <member name="E:RageCoop.Server.Scripting.ServerEvents.OnPlayerDisconnected">
             <summary>
-            Invoked when a player disconnected, all method won't be effective in this scope.
+                Invoked when a player disconnected, all method won't be effective in this scope.
             </summary>
         </member>
         <member name="E:RageCoop.Server.Scripting.ServerEvents.OnPlayerUpdate">
             <summary>
-            Invoked everytime a player's main ped has been updated
+                Invoked everytime a player's main ped has been updated
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.API">
             <summary>
-            An class that can be used to interact with RageCoop server.
+                An class that can be used to interact with RageCoop server.
             </summary>
         </member>
         <member name="F:RageCoop.Server.Scripting.API.Events">
             <summary>
-            Server side events
+                Server side events
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.API.Entities">
             <summary>
-            All synchronized entities on this server.
+                All synchronized entities on this server.
             </summary>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.GetAllClients">
             <summary>
-            Get a list of all Clients
+                Get a list of all Clients
             </summary>
             <returns>All clients as a dictionary indexed by their main character's id</returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.GetClientByUsername(System.String)">
             <summary>
-            Get the client by its username
+                Get the client by its username
             </summary>
             <param name="username">The username to search for (non case-sensitive)</param>
             <returns>The Client from this user or null</returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.SendChatMessage(System.String,System.Collections.Generic.List{RageCoop.Server.Client},System.String,System.Nullable{System.Boolean})">
             <summary>
-            Send a chat message to all players, use <see cref="M:RageCoop.Server.Client.SendChatMessage(System.String,System.String)"/> to send to an individual client.
+                Send a chat message to all players, use <see cref="M:RageCoop.Server.Client.SendChatMessage(System.String,System.String)" /> to send to an
+                individual client.
             </summary>
             <param name="targets">The clients to send message, leave it null to send to all clients</param>
             <param name="message">The chat message</param>
             <param name="username">The username which send this message (default = "Server")</param>
-            <param name="raiseEvent">Weather to raise the <see cref="E:RageCoop.Server.Scripting.ServerEvents.OnChatMessage"/> event defined in <see cref="F:RageCoop.Server.Scripting.API.Events"/></param>
-            <remarks>When <paramref name="raiseEvent"/> is unspecified and <paramref name="targets"/> is null or unspecified, <paramref name="raiseEvent"/> will be set to true</remarks>
+            <param name="raiseEvent">
+                Weather to raise the <see cref="E:RageCoop.Server.Scripting.ServerEvents.OnChatMessage" /> event defined in
+                <see cref="F:RageCoop.Server.Scripting.API.Events" />
+            </param>
+            <remarks>
+                When <paramref name="raiseEvent" /> is unspecified and <paramref name="targets" /> is null or unspecified,
+                <paramref name="raiseEvent" /> will be set to true
+            </remarks>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.RegisterSharedFile(System.String,System.String)">
             <summary>
-            Register a file to be shared with clients
+                Register a file to be shared with clients
             </summary>
             <param name="name">name of this file</param>
             <param name="path">path to this file</param>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.RegisterSharedFile(System.String,RageCoop.Core.Scripting.ResourceFile)">
             <summary>
-            Register a file to be shared with clients
+                Register a file to be shared with clients
             </summary>
             <param name="name">name of this file</param>
             <param name="file"></param>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.RegisterCommand(System.String,System.String,System.Int16,System.Action{RageCoop.Server.Scripting.CommandContext})">
             <summary>
-            Register a new command chat command (Example: "/test")
+                Register a new command chat command (Example: "/test")
             </summary>
             <param name="name">The name of the command (Example: "test" for "/test")</param>
             <param name="usage">How to use this message (argsLength required!)</param>
@@ -239,221 +241,207 @@
         </member>
         <member name="M:RageCoop.Server.Scripting.API.RegisterCommand(System.String,System.Action{RageCoop.Server.Scripting.CommandContext})">
             <summary>
-            Register a new command chat command (Example: "/test")
+                Register a new command chat command (Example: "/test")
             </summary>
             <param name="name">The name of the command (Example: "test" for "/test")</param>
             <param name="callback">A callback to invoke when the command received.</param>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.RegisterCommands``1">
             <summary>
-            Register all commands in a static class
+                Register all commands in a static class
             </summary>
             <typeparam name="T">Your static class with commands</typeparam>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.RegisterCommands(System.Object)">
             <summary>
-            Register all commands inside an class instance
+                Register all commands inside an class instance
             </summary>
             <param name="obj">The instance of type containing the commands</param>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.SendNativeCall(System.Collections.Generic.List{RageCoop.Server.Client},GTA.Native.Hash,System.Object[])">
             <summary>
-            Send native call specified clients.
+                Send native call specified clients.
             </summary>
             <param name="hash"></param>
             <param name="args"></param>
-            /// <param name="clients">Clients to send, null for all clients</param>
+            ///
+            <param name="clients">Clients to send, null for all clients</param>
         </member>
-        <member name="M:RageCoop.Server.Scripting.API.SendCustomEvent(System.Collections.Generic.List{RageCoop.Server.Client},System.Int32,System.Object[])">
+        <member name="M:RageCoop.Server.Scripting.API.SendCustomEvent(RageCoop.Core.Scripting.CustomEventFlags,System.Collections.Generic.List{RageCoop.Server.Client},RageCoop.Core.Scripting.CustomEventHash,System.Object[])">
             <summary>
-            Send an event and data to the specified clients. Use <see cref="M:RageCoop.Server.Client.SendCustomEvent(System.Int32,System.Object[])"/> if you want to send event to individual client.
+                Send an event and data to the specified clients.
             </summary>
-            <param name="eventHash">An unique identifier of the event, you can use <see cref="M:RageCoop.Core.Scripting.CustomEvents.Hash(System.String)"/> to get it from a string</param>
-            <param name="args">The objects conataing your data, see <see cref="P:RageCoop.Server.Scripting.CustomEventReceivedArgs.Args"/> for supported types.</param>
+            <param name="flags"></param>
+            <param name="eventHash">An unique identifier of the event/> to get it from a string</param>
+            <param name="args">
+                The objects conataing your data, see <see cref="!:Scripting.CustomEventReceivedArgs.Args" /> for
+                supported types.
+            </param>
             <param name="targets">The target clients to send. Leave it null to send to all clients</param>
         </member>
-        <member name="M:RageCoop.Server.Scripting.API.SendCustomEventQueued(System.Collections.Generic.List{RageCoop.Server.Client},System.Int32,System.Object[])">
+        <member name="M:RageCoop.Server.Scripting.API.RegisterCustomEventHandler(RageCoop.Core.Scripting.CustomEventHash,System.Action{RageCoop.Server.Scripting.CustomEventReceivedArgs})">
             <summary>
-            Send a CustomEvent that'll be queued at client side and invoked from script thread
+                Register an handler to the specifed event hash, one event can have multiple handlers.
             </summary>
-            <param name="targets"></param>
-            <param name="eventHash"></param>
-            <param name="args"></param>
-        </member>
-        <member name="M:RageCoop.Server.Scripting.API.RegisterCustomEventHandler(System.Int32,System.Action{RageCoop.Server.Scripting.CustomEventReceivedArgs})">
-            <summary>
-            Register an handler to the specifed event hash, one event can have multiple handlers.
-            </summary>
-            <param name="hash">An unique identifier of the event, you can hash your event name with <see cref="M:RageCoop.Core.Scripting.CustomEvents.Hash(System.String)"/></param>
+            <param name="hash">An unique identifier of the event></param>
             <param name="handler">An handler to be invoked when the event is received from the server.</param>
-        </member>
-        <member name="M:RageCoop.Server.Scripting.API.RegisterCustomEventHandler(System.String,System.Action{RageCoop.Server.Scripting.CustomEventReceivedArgs})">
-            <summary>
-            Register an event handler for specified event name.
-            </summary>
-            <param name="name">This value will be hashed to an int to reduce overhead</param>
-            <param name="handler">The handler to be invoked when the event is received</param>
         </member>
         <member name="M:RageCoop.Server.Scripting.API.FindScript(System.String,System.String)">
             <summary>
-            Find a script matching the specified type
+                Find a script matching the specified type
             </summary>
             <param name="scriptFullName">The full name of the script's type, e.g. RageCoop.Resources.Discord.Main</param>
             <param name="resourceName">Which resource to search for this script. Will search in all loaded resources if unspecified </param>
-            <returns>A <see langword="dynamic"/> object reprensenting the script, or <see langword="null"/> if not found.</returns>
-            <remarks>Explicitly casting the return value to orginal type will case a exception to be thrown due to the dependency isolation mechanism in resource system. 
-            You shouldn't reference the target resource assemblies either, since it causes the referenced assembly to be loaded and started in your resource.</remarks>
+            <returns>A <see langword="dynamic" /> object reprensenting the script, or <see langword="null" /> if not found.</returns>
+            <remarks>
+                Explicitly casting the return value to orginal type will case a exception to be thrown due to the dependency
+                isolation mechanism in resource system.
+                You shouldn't reference the target resource assemblies either, since it causes the referenced assembly to be loaded
+                and started in your resource.
+            </remarks>
         </member>
         <member name="P:RageCoop.Server.Scripting.API.Logger">
             <summary>
-            Get a <see cref="T:RageCoop.Core.Logger"/> that the server is currently using, you should use <see cref="F:RageCoop.Server.Scripting.ServerResource.Logger"/> to display resource-specific information.
+                Get a <see cref="T:RageCoop.Core.Logger" /> that the server is currently using, you should use
+                <see cref="F:RageCoop.Server.Scripting.ServerResource.Logger" /> to display resource-specific information.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.API.Host">
             <summary>
-            Gets or sets the client that is resposible for synchronizing time and weather
+                Gets or sets the client that is resposible for synchronizing time and weather
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.API.LoadedResources">
             <summary>
-            Get all currently loaded <see cref="T:RageCoop.Server.Scripting.ServerResource"/> as a dictionary indexed by their names
+                Get all currently loaded <see cref="T:RageCoop.Server.Scripting.ServerResource" /> as a dictionary indexed by their names
             </summary>
-            <remarks>Accessing this property from script constructor is stronly discouraged since other scripts and resources might have yet been loaded.
-            Accessing from <see cref="M:RageCoop.Server.Scripting.ServerScript.OnStart"/> is not recommended either. Although all script assemblies will have been loaded to memory and instantiated, <see cref="M:RageCoop.Server.Scripting.ServerScript.OnStart"/> invocation of other scripts are not guaranteed.
+            <remarks>
+                Accessing this property from script constructor is stronly discouraged since other scripts and resources might have
+                yet been loaded.
+                Accessing from <see cref="M:RageCoop.Server.Scripting.ServerScript.OnStart" /> is not recommended either. Although all script assemblies will
+                have been loaded to memory and instantiated, <see cref="M:RageCoop.Server.Scripting.ServerScript.OnStart" /> invocation of other scripts are
+                not guaranteed.
             </remarks>
         </member>
         <member name="T:RageCoop.Server.Scripting.ChatEventArgs">
             <summary>
-            
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ChatEventArgs.Client">
             <summary>
-            The client that sent this message, will be null if sent from server
+                The client that sent this message, will be null if sent from server
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ChatEventArgs.Message">
             <summary>
-            Message
+                Message
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ChatEventArgs.ClaimedSender">
             <summary>
-            Only used when sending a message via <see cref="M:RageCoop.Server.Scripting.API.SendChatMessage(System.String,System.Collections.Generic.List{RageCoop.Server.Client},System.String,System.Nullable{System.Boolean})"/>
+                Only used when sending a message via <see cref="M:RageCoop.Server.Scripting.API.SendChatMessage(System.String,System.Collections.Generic.List{RageCoop.Server.Client},System.String,System.Nullable{System.Boolean})" />
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.CustomEventReceivedArgs">
             <summary>
-            
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.CustomEventReceivedArgs.Client">
             <summary>
-            The <see cref="T:RageCoop.Server.Client"/> that triggered this event
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Scripting.CustomEventReceivedArgs.Hash">
-            <summary>
-            The event hash
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Scripting.CustomEventReceivedArgs.Args">
-            <summary>
-            Supported types: byte, short, ushort, int, uint, long, ulong, float, bool, string, Vector3, Quaternion, Vector2 <see cref="P:RageCoop.Server.Scripting.ServerObject.Handle"/>
+                The <see cref="T:RageCoop.Server.Client" /> that triggered this event
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.OnCommandEventArgs">
             <summary>
-            
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.OnCommandEventArgs.Client">
             <summary>
-            The <see cref="T:RageCoop.Server.Client"/> that executed this command, will be null if sent from server.
+                The <see cref="T:RageCoop.Server.Client" /> that executed this command, will be null if sent from server.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.OnCommandEventArgs.Name">
             <summary>
-            The name of executed command
+                The name of executed command
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.OnCommandEventArgs.Args">
             <summary>
-            Arguments
+                Arguments
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.OnCommandEventArgs.Cancel">
             <summary>
-            If this value was set to true, corresponding handler registered with <see cref="M:RageCoop.Server.Scripting.API.RegisterCommand(System.String,System.Action{RageCoop.Server.Scripting.CommandContext})"/> will not be invoked.
+                If this value was set to true, corresponding handler registered with
+                <see cref="M:RageCoop.Server.Scripting.API.RegisterCommand(System.String,System.Action{RageCoop.Server.Scripting.CommandContext})" /> will not be invoked.
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.HandshakeEventArgs">
             <summary>
-            
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.HandshakeEventArgs.ID">
             <summary>
-            The player's ID
+                The player's ID
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.HandshakeEventArgs.Username">
             <summary>
-            The claimed username
+                The claimed username
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.HandshakeEventArgs.PasswordHash">
             <summary>
-            The client password hashed with SHA256 algorithm.
+                The client password hashed with SHA256 algorithm.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.HandshakeEventArgs.EndPoint">
             <summary>
-            The <see cref="P:RageCoop.Server.Scripting.HandshakeEventArgs.EndPoint"/> that sent the handshake request.
+                The <see cref="P:RageCoop.Server.Scripting.HandshakeEventArgs.EndPoint" /> that sent the handshake request.
             </summary>
         </member>
         <member name="M:RageCoop.Server.Scripting.HandshakeEventArgs.Deny(System.String)">
             <summary>
-            Deny the connection attempt
+                Deny the connection attempt
             </summary>
             <param name="reason"></param>
         </member>
         <member name="T:RageCoop.Server.Scripting.ServerEntities">
             <summary>
-            Manipulate entities from the server
+                Manipulate entities from the server
             </summary>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.GetPedByID(System.Int32)">
             <summary>
-            Get a <see cref="T:RageCoop.Server.Scripting.ServerPed"/> by it's id
+                Get a <see cref="T:RageCoop.Server.Scripting.ServerPed" /> by it's id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.GetVehicleByID(System.Int32)">
             <summary>
-            Get a <see cref="T:RageCoop.Server.Scripting.ServerVehicle"/> by it's id
+                Get a <see cref="T:RageCoop.Server.Scripting.ServerVehicle" /> by it's id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.GetPropByID(System.Int32)">
             <summary>
-            Get a <see cref="T:RageCoop.Server.Scripting.ServerProp"/> owned by server from it's ID.
+                Get a <see cref="T:RageCoop.Server.Scripting.ServerProp" /> owned by server from it's ID.
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.GetBlipByID(System.Int32)">
             <summary>
-            Get a <see cref="T:RageCoop.Server.Scripting.ServerBlip"/> by it's id.
+                Get a <see cref="T:RageCoop.Server.Scripting.ServerBlip" /> by it's id.
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.CreateProp(GTA.Model,GTA.Math.Vector3,GTA.Math.Vector3)">
             <summary>
-            Create a static prop owned by server.
+                Create a static prop owned by server.
             </summary>
             <param name="model"></param>
             <param name="pos"></param>
@@ -462,7 +450,7 @@
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.CreateVehicle(RageCoop.Server.Client,GTA.Model,GTA.Math.Vector3,System.Single)">
             <summary>
-            Create a vehicle
+                Create a vehicle
             </summary>
             <param name="owner">Owner of this vehicle</param>
             <param name="model">model</param>
@@ -472,7 +460,7 @@
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.CreateBlip(GTA.Math.Vector3,System.Int32)">
             <summary>
-            Create a static <see cref="T:RageCoop.Server.Scripting.ServerBlip"/> owned by server.
+                Create a static <see cref="T:RageCoop.Server.Scripting.ServerBlip" /> owned by server.
             </summary>
             <param name="pos"></param>
             <param name="rotation"></param>
@@ -480,458 +468,469 @@
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.GetAllPeds">
             <summary>
-            Get all peds on this server
+                Get all peds on this server
             </summary>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.GetAllVehicles">
             <summary>
-            Get all vehicles on this server
+                Get all vehicles on this server
             </summary>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.GetAllProps">
             <summary>
-            Get all static prop objects owned by server
+                Get all static prop objects owned by server
             </summary>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.GetAllBlips">
             <summary>
-            Get all blips owned by server
+                Get all blips owned by server
             </summary>
             <returns></returns>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerEntities.Update(RageCoop.Core.Packets.PedSync,RageCoop.Server.Client)">
             <summary>
-            Not thread safe
+                Not thread safe
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.ServerObject">
             <summary>
-            Server-side object controller
+                Server-side object controller
             </summary>
         </member>
         <member name="F:RageCoop.Server.Scripting.ServerObject.Server">
             <summary>
-            Server that this object belongs to
+                Server that this object belongs to
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerObject.Handle">
             <summary>
-            Pass this as an argument in CustomEvent or NativeCall to convert this object to handle at client side.
+                Pass this as an argument in CustomEvent or NativeCall to convert this object to handle at client side.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerObject.Owner">
             <summary>
-            The client that owns this object, null if it's owned by server.
+                The client that owns this object, null if it's owned by server.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerObject.ID">
             <summary>
-            Network ID of this object.
+                Network ID of this object.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerObject.Model">
             <summary>
-            The object's model
+                The object's model
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerObject.Position">
             <summary>
-            Gets or sets this object's position
+                Gets or sets this object's position
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerObject.Rotation">
             <summary>
-            Gets or sets this object's rotation
+                Gets or sets this object's rotation
             </summary>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerObject.Delete">
             <summary>
-            Send updated information to clients, would be called automatically.
+                Send updated information to clients, would be called automatically.
             </summary>
             <summary>
-            Delete this object
+                Delete this object
             </summary>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerObject.Freeze(System.Boolean)">
             <summary>
-            Freeze this object, will throw an exception if it's a ServerProp.
+                Freeze this object, will throw an exception if it's a ServerProp.
             </summary>
             <param name="toggle"></param>
             <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="T:RageCoop.Server.Scripting.ServerProp">
             <summary>
-            Represents an prop owned by server.
-            </summary>
-        </member>
-        <member name="M:RageCoop.Server.Scripting.ServerProp.Delete">
-            <summary>
-            Delete this prop
+                Represents an prop owned by server.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerProp.Position">
             <summary>
-            Gets or sets this object's position
+                Gets or sets this object's position
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerProp.Rotation">
             <summary>
-            Gets or sets this object's rotation
+                Gets or sets this object's rotation
+            </summary>
+        </member>
+        <member name="M:RageCoop.Server.Scripting.ServerProp.Delete">
+            <summary>
+                Delete this prop
             </summary>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerProp.Update">
             <summary>
-            Send updated information to clients, would be called automatically.
+                Send updated information to clients, would be called automatically.
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.ServerPed">
             <summary>
-            Represents a ped from a client
+                Represents a ped from a client
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerPed.LastVehicle">
             <summary>
-            Get the ped's last vehicle
+                Get the ped's last vehicle
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerPed.AttachedBlip">
             <summary>
-            Get the <see cref="T:RageCoop.Server.Scripting.PedBlip"/> attached to this ped.
+                Get the <see cref="T:RageCoop.Server.Scripting.PedBlip" /> attached to this ped.
             </summary>
-        </member>
-        <member name="M:RageCoop.Server.Scripting.ServerPed.AddBlip">
-            <summary>
-            Attach a blip to this ped.
-            </summary>
-            <returns></returns>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerPed.Health">
             <summary>
-            Health
+                Health
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerPed.IsInvincible">
             <summary>
-            Get or set whether this ped is invincible
+                Get or set whether this ped is invincible
             </summary>
+        </member>
+        <member name="M:RageCoop.Server.Scripting.ServerPed.AddBlip">
+            <summary>
+                Attach a blip to this ped.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:RageCoop.Server.Scripting.ServerVehicle">
             <summary>
-            Represents a vehicle from a client
+                Represents a vehicle from a client
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerVehicle.Rotation">
             <summary>
-            Gets or sets vehicle rotation
+                Gets or sets vehicle rotation
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerVehicle.Quaternion">
             <summary>
-            Get this vehicle's quaternion
+                Get this vehicle's quaternion
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.ServerBlip">
             <summary>
-            A static blip owned by server.
+                A static blip owned by server.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerBlip.Handle">
             <summary>
-            Pass this as an argument in CustomEvent or NativeCall to convert this object to handle at client side.
+                Pass this as an argument in CustomEvent or NativeCall to convert this object to handle at client side.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerBlip.ID">
             <summary>
-            Network ID (not handle!)
+                Network ID (not handle!)
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerBlip.Color">
             <summary>
-            Color of this blip
+                Color of this blip
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerBlip.Sprite">
             <summary>
-            Sprite of this blip
+                Sprite of this blip
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerBlip.Scale">
             <summary>
-            Scale of this blip
+                Scale of this blip
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerBlip.Position">
             <summary>
-            Position of this blip
+                Position of this blip
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerBlip.Rotation">
             <summary>
-            Rotation of this blip
+                Rotation of this blip
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerBlip.Name">
             <summary>
-            Name of this blip
+                Name of this blip
             </summary>
         </member>
         <member name="M:RageCoop.Server.Scripting.ServerBlip.Delete">
             <summary>
-            Delete this blip
+                Delete this blip
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.PedBlip">
             <summary>
-            Represent a blip attached to ped.
+                Represent a blip attached to ped.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.PedBlip.Ped">
             <summary>
-            Get the <see cref="T:RageCoop.Server.Scripting.ServerPed"/> that this blip attached to.
+                Get the <see cref="T:RageCoop.Server.Scripting.ServerPed" /> that this blip attached to.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.PedBlip.Color">
             <summary>
-            Color of this blip
+                Color of this blip
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.PedBlip.Sprite">
             <summary>
-            Sprite of this blip
+                Sprite of this blip
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.PedBlip.Scale">
             <summary>
-            Scale of this blip
+                Scale of this blip
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.ServerResource">
             <summary>
-            A class representing a server side resource, each resource is isolated from another and will be started alongside the server.
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Scripting.ServerResource.Name">
-            <summary>
-            Name of the resource
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Scripting.ServerResource.DataFolder">
-            <summary>
-            A resource-specific folder that can be used to store your files.
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Scripting.ServerResource.Scripts">
-            <summary>
-            Get all <see cref="T:RageCoop.Server.Scripting.ServerScript"/> instance in this resource
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Scripting.ServerResource.Files">
-            <summary>
-            Get all <see cref="T:RageCoop.Core.Scripting.ResourceFile"/> that can be used to acces files in this resource
+                A class representing a server side resource, each resource is isolated from another and will be started alongside
+                the server.
             </summary>
         </member>
         <member name="F:RageCoop.Server.Scripting.ServerResource.Logger">
             <summary>
-            Get a <see cref="F:RageCoop.Server.Scripting.ServerResource.Logger"/> instance that can be used to show information in console.
+                Get a <see cref="F:RageCoop.Server.Scripting.ServerResource.Logger" /> instance that can be used to show information in console.
+            </summary>
+        </member>
+        <member name="P:RageCoop.Server.Scripting.ServerResource.Name">
+            <summary>
+                Name of the resource
+            </summary>
+        </member>
+        <member name="P:RageCoop.Server.Scripting.ServerResource.DataFolder">
+            <summary>
+                A resource-specific folder that can be used to store your files.
+            </summary>
+        </member>
+        <member name="P:RageCoop.Server.Scripting.ServerResource.Scripts">
+            <summary>
+                Get all <see cref="T:RageCoop.Server.Scripting.ServerScript" /> instance in this resource
+            </summary>
+        </member>
+        <member name="P:RageCoop.Server.Scripting.ServerResource.Files">
+            <summary>
+                Get all <see cref="T:RageCoop.Core.Scripting.ResourceFile" /> that can be used to acces files in this resource
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.ServerScript">
             <summary>
-            Inherit from this class, constructor will be called automatically, but other scripts might have yet been loaded and <see cref="P:RageCoop.Server.Scripting.ServerScript.API"/> will be null, you should use <see cref="M:RageCoop.Server.Scripting.ServerScript.OnStart"/>. to initiate your script.
-            </summary>
-        </member>
-        <member name="M:RageCoop.Server.Scripting.ServerScript.OnStart">
-            <summary>
-            This method would be called from listener thread after all scripts have been loaded.
-            </summary>
-        </member>
-        <member name="M:RageCoop.Server.Scripting.ServerScript.OnStop">
-            <summary>
-            This method would be called from listener thread when the server is shutting down, you MUST terminate all background jobs/threads in this method.
+                Inherit from this class, constructor will be called automatically, but other scripts might have yet been loaded and
+                <see cref="P:RageCoop.Server.Scripting.ServerScript.API" /> will be null, you should use <see cref="M:RageCoop.Server.Scripting.ServerScript.OnStart" />. to initiate your script.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerScript.API">
             <summary>
-            Get the <see cref="T:RageCoop.Server.Scripting.API"/> instance that can be used to control the server.
+                Get the <see cref="T:RageCoop.Server.Scripting.API" /> instance that can be used to control the server.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerScript.CurrentResource">
             <summary>
-            Get the <see cref="T:RageCoop.Server.Scripting.ServerResource"/> this script belongs to, this property won't be initiated before <see cref="M:RageCoop.Server.Scripting.ServerScript.OnStart"/>.
+                Get the <see cref="T:RageCoop.Server.Scripting.ServerResource" /> this script belongs to, this property won't be initiated before
+                <see cref="M:RageCoop.Server.Scripting.ServerScript.OnStart" />.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerScript.CurrentFile">
             <summary>
-            Get the <see cref="T:RageCoop.Core.Scripting.ResourceFile"/> that the script belongs to.
+                Get the <see cref="T:RageCoop.Core.Scripting.ResourceFile" /> that the script belongs to.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.ServerScript.Logger">
             <summary>
-            Eqivalent of <see cref="F:RageCoop.Server.Scripting.ServerResource.Logger"/> in <see cref="P:RageCoop.Server.Scripting.ServerScript.CurrentResource"/>
+                Eqivalent of <see cref="F:RageCoop.Server.Scripting.ServerResource.Logger" /> in <see cref="P:RageCoop.Server.Scripting.ServerScript.CurrentResource" />
+            </summary>
+        </member>
+        <member name="M:RageCoop.Server.Scripting.ServerScript.OnStart">
+            <summary>
+                This method would be called from listener thread after all scripts have been loaded.
+            </summary>
+        </member>
+        <member name="M:RageCoop.Server.Scripting.ServerScript.OnStop">
+            <summary>
+                This method would be called from listener thread when the server is shutting down, you MUST terminate all
+                background jobs/threads in this method.
             </summary>
         </member>
         <member name="T:RageCoop.Server.Scripting.Command">
             <summary>
-            Decorate your method with this attribute and use <see cref="M:RageCoop.Server.Scripting.API.RegisterCommands``1"/> or <see cref="M:RageCoop.Server.Scripting.API.RegisterCommands(System.Object)"/> to register commands.
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Scripting.Command.Name">
-            <summary>
-            Sets name of the command
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Scripting.Command.Usage">
-            <summary>
-            Set the Usage (Example: "Please use "/help"". ArgsLength required!)
-            </summary>
-        </member>
-        <member name="P:RageCoop.Server.Scripting.Command.ArgsLength">
-            <summary>
-            Set the length of arguments (Example: 2 for "/message USERNAME MESSAGE". Usage required!)
+                Decorate your method with this attribute and use <see cref="M:RageCoop.Server.Scripting.API.RegisterCommands``1" /> or
+                <see cref="M:RageCoop.Server.Scripting.API.RegisterCommands(System.Object)" /> to register commands.
             </summary>
         </member>
         <member name="M:RageCoop.Server.Scripting.Command.#ctor(System.String)">
             <summary>
-            
             </summary>
             <param name="name">Name of the command</param>
         </member>
+        <member name="P:RageCoop.Server.Scripting.Command.Name">
+            <summary>
+                Sets name of the command
+            </summary>
+        </member>
+        <member name="P:RageCoop.Server.Scripting.Command.Usage">
+            <summary>
+                Set the Usage (Example: "Please use "/help"". ArgsLength required!)
+            </summary>
+        </member>
+        <member name="P:RageCoop.Server.Scripting.Command.ArgsLength">
+            <summary>
+                Set the length of arguments (Example: 2 for "/message USERNAME MESSAGE". Usage required!)
+            </summary>
+        </member>
         <member name="T:RageCoop.Server.Scripting.CommandContext">
             <summary>
-            The context containg command information. 
+                The context containg command information.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.CommandContext.Client">
             <summary>
-            Gets the client which executed the command
+                Gets the client which executed the command
             </summary>
         </member>
         <member name="P:RageCoop.Server.Scripting.CommandContext.Args">
             <summary>
-            Gets the arguments (Example: "/message USERNAME MESSAGE", Args[0] for USERNAME)
+                Gets the arguments (Example: "/message USERNAME MESSAGE", Args[0] for USERNAME)
             </summary>
         </member>
         <member name="T:RageCoop.Server.Settings">
             <summary>
-            Settings for RageCoop Server
+                Settings for RageCoop Server
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.Port">
             <summary>
-            Port to listen for incoming connections
+                Port to listen for incoming connections
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.MaxPlayers">
             <summary>
-            Maximum number of players on this server
+                Maximum number of players on this server
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.MaxLatency">
             <summary>
-            Maximum latency allowed for a client, a client will be kicked if it's latency it's higher than this value
+                Maximum latency allowed for a client, a client will be kicked if it's latency it's higher than this value
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.Name">
             <summary>
-            The server name to be shown on master server
+                The server name to be shown on master server
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.Website">
             <summary>
-            The website address to be shown on master server
+                The website address to be shown on master server
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.Description">
             <summary>
-            The description to be shown on master server
+                The description to be shown on master server
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.GameMode">
             <summary>
-            The game mode to be shown on master server
+                The game mode to be shown on master server
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.Language">
             <summary>
-            The language to be shown on master server
+                The language to be shown on master server
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.WelcomeMessage">
             <summary>
-            The message to send when a client connected (not visible to others)
+                The message to send when a client connected (not visible to others)
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.AnnounceSelf">
             <summary>
-            Whether or not to announce this server so it'll appear on server list.
+                Whether or not to announce this server so it'll appear on server list.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.MasterServer">
             <summary>
-            Master server address, mostly doesn't need to be changed.
+                Master server address, mostly doesn't need to be changed.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.LogLevel">
             <summary>
-            See <see cref="F:RageCoop.Core.Logger.LogLevel"/>.
+                See <see cref="F:RageCoop.Core.Logger.LogLevel" />.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.NpcStreamingDistance">
             <summary>
-            NPC data won't be sent to a player if their distance is greater than this value. -1 for unlimited.
+                NPC data won't be sent to a player if their distance is greater than this value. -1 for unlimited.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.PlayerStreamingDistance">
             <summary>
-            Player's data won't be sent to another player if their distance is greater than this value. -1 for unlimited.
+                Player's data won't be sent to another player if their distance is greater than this value. -1 for unlimited.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.WeatherTimeSync">
             <summary>
-            If enabled, all clients will have same weather and time as host
+                If enabled, all clients will have same weather and time as host
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.AllowedUsernameChars">
             <summary>
-            List of all allowed username characters
+                List of all allowed username characters
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.UseP2P">
             <summary>
-            Whether to use direct connection between players to send entity information, <see cref="P:RageCoop.Server.Settings.UseZeroTier"/> needs to be enabled if on WAN  for this feature to function properly.
+                Whether to use direct connection between players to send entity information, <see cref="P:RageCoop.Server.Settings.UseZeroTier" /> needs to be
+                enabled if on WAN  for this feature to function properly.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.UseZeroTier">
             <summary>
-            Whether to enable zerotier VLAN functionality, allowing you to host a server behind NAT firewall, no port forward required.
+                Whether to enable zerotier VLAN functionality, allowing you to host a server behind NAT firewall, no port forward
+                required.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.UseVoice">
             <summary>
-            Use in-game voice chat to communicate with other players
+                Use in-game voice chat to communicate with other players
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.ZeroTierNetworkID">
             <summary>
-            The zerotier network id to join, default value is zerotier's public Earth network.
+                The zerotier network id to join, default value is zerotier's public Earth network.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.AutoUpdate">
             <summary>
-            Automatically update to nightly build when an update is avalible, check is performed every 10 minutes.
+                Automatically update to nightly build when an update is avalible, check is performed every 10 minutes.
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.KickGodMode">
             <summary>
-            Kick godmode assholes
+                Kick godmode assholes
             </summary>
         </member>
         <member name="P:RageCoop.Server.Settings.KickSpamming">
             <summary>
-            Kick spamming assholes
+                Kick spamming assholes
+            </summary>
+        </member>
+        <member name="P:RageCoop.Server.Settings.SpamLimit">
+            <summary>
+                Player that spawned entities more than this amount will be kicked if <see cref="P:RageCoop.Server.Settings.KickSpamming" /> is enabled.
             </summary>
         </member>
     </members>

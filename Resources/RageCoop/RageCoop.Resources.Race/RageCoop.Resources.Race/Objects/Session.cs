@@ -18,25 +18,25 @@ namespace RageCoop.Resources.Race.Objects
         public void Rank()
         {
             var checkPoints = Map.Checkpoints;
-            var ordered=Players.OrderByDescending(x=>
+            var ordered = Players.OrderByDescending(x =>
             {
                 double score = x.CheckpointsPassed;
-                if (x.CheckpointsPassed<checkPoints.Length)
+                if (x.CheckpointsPassed < checkPoints.Length)
                 {
-                    if (x.Client.Player.LastVehicle!=null)
+                    if (x.Client.Player.LastVehicle != null)
                     {
-                        score-=x.Client.Player.LastVehicle.Position.DistanceTo(checkPoints[x.CheckpointsPassed])*0.000001;
+                        score -= x.Client.Player.LastVehicle.Position.DistanceTo(checkPoints[x.CheckpointsPassed]) * 0.000001;
                     }
                     else
                     {
-                        score-=1;
+                        score -= 1;
                     }
                 }
                 return score;
             }).ToArray();
-            for(int i = 0; i<ordered.Length; i++)
+            for (int i = 0; i < ordered.Length; i++)
             {
-                ordered[i].Ranking=(ushort)(i+1);
+                ordered[i].Ranking = (ushort)(i + 1);
             }
         }
     }

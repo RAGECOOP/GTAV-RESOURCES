@@ -1,27 +1,41 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <OutDir>..\..\</OutDir>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutDir>..\..\</OutDir>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="SharpZipLib" Version="1.3.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DiscUtils.Iso9660" Version="0.16.13" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="SharpZipLib" Version="1.3.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="RageCoop.Client">
-      <HintPath>..\..\..\RAGECOOP-V\bin\Debug\Client\RageCoop.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="RageCoop.Core">
-      <HintPath>..\..\..\RAGECOOP-V\bin\Debug\Core\RageCoop.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="RageCoop.Server">
-      <HintPath>..\..\..\RAGECOOP-V\bin\Debug\Server\RageCoop.Server.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="LemonUI.SHVDNC">
+		  <HintPath>..\..\..\RAGECOOP-V\libs\LemonUI.SHVDNC.dll</HintPath>
+		</Reference>
+		<Reference Include="Lidgren.Network">
+		  <HintPath>..\..\..\RAGECOOP-V\bin\API\Lidgren.Network.dll</HintPath>
+		</Reference>
+		<Reference Include="RageCoop.Client.Scripting">
+		  <HintPath>..\..\..\RAGECOOP-V\bin\API\RageCoop.Client.Scripting.dll</HintPath>
+		</Reference>
+		<Reference Include="RageCoop.Core">
+			<HintPath>..\..\..\RAGECOOP-V\bin\API\RageCoop.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="RageCoop.Server">
+			<HintPath>..\..\..\RAGECOOP-V\bin\API\RageCoop.Server.dll</HintPath>
+		</Reference>
+		<Reference Include="ScriptHookVDotNetCore">
+		  <HintPath>..\..\..\RAGECOOP-V\bin\API\ScriptHookVDotNetCore.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="del $(OutDir)*.exe&#xD;&#xA;del $(OutDir)*.dll&#xD;&#xA;del $(OutDir)*.json&#xD;&#xA;del $(OutDir)*.pdb&#xD;&#xA;del $(OutDir)*.xml" />
+	</Target>
 
 </Project>

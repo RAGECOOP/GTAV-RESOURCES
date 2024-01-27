@@ -1,6 +1,6 @@
 ﻿using LiteDB;
-using System.Data.SQLite;
 using RageCoop.Resources.Race.Objects;
+using System.Data.SQLite;
 
 var filename = "times.db";
 if (!File.Exists(filename))
@@ -10,7 +10,7 @@ if (!File.Exists(filename))
     Environment.Exit(0);
 }
 
-var Connection=new SQLiteConnection(new SQLiteConnectionStringBuilder()
+var Connection = new SQLiteConnection(new SQLiteConnectionStringBuilder()
 {
     DataSource = filename,
     Version = 3
@@ -30,16 +30,16 @@ new SQLiteCommand(@"
         `Win` INTEGER
     );"
 , Connection).ExecuteNonQuery();
-var reader = new SQLiteCommand("SELECT * FROM `times`;",Connection).ExecuteReader();
-int i=0;
+var reader = new SQLiteCommand("SELECT * FROM `times`;", Connection).ExecuteReader();
+int i = 0;
 while (reader.Read())
 {
     newRecords.Insert(new Record()
     {
-        Race=reader["Race"].ToString(),
-        Player=reader["Player"].ToString(),
-        Time=(long)reader["Time"],
-        Win=reader["Win"].ToString()=="1"
+        Race = reader["Race"].ToString(),
+        Player = reader["Player"].ToString(),
+        Time = (long)reader["Time"],
+        Win = reader["Win"].ToString() == "1"
     });
     i++;
     Console.Write($"\rMigrated {i} records to {newFile}");

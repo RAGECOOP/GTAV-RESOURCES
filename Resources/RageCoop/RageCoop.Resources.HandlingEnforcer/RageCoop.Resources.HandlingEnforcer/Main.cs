@@ -1,7 +1,5 @@
 ﻿using RageCoop.Server.Scripting;
-using RageCoop.Core;
 using System.IO;
-using System.Collections.Generic;
 
 namespace RageCoop.Resources.HandlingEnforcer
 {
@@ -14,7 +12,7 @@ namespace RageCoop.Resources.HandlingEnforcer
 
         public override void OnStop()
         {
-            
+
         }
     }
 }

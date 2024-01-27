@@ -1,23 +1,59 @@
 {
   "runtimeTarget": {
-    "name": ".NETCoreApp,Version=v6.0",
+    "name": ".NETCoreApp,Version=v7.0",
     "signature": ""
   },
   "compilationOptions": {},
   "targets": {
-    ".NETCoreApp,Version=v6.0": {
+    ".NETCoreApp,Version=v7.0": {
       "RageCoop.ResourceBuilder/1.0.0": {
         "dependencies": {
+          "DiscUtils.Iso9660": "0.16.13",
           "Newtonsoft.Json": "13.0.1",
           "SharpZipLib": "1.3.3",
-          "RageCoop.Client": "1.5.2.121",
+          "LemonUI.SHVDNC": "1.5.1.0",
+          "Lidgren.Network": "2012.1.7.0",
+          "RageCoop.Client.Scripting": "1.0.0.0",
           "RageCoop.Core": "0.1.0.0",
-          "RageCoop.Server": "1.5.2.104"
+          "RageCoop.Server": "1.6.0.38",
+          "ScriptHookVDotNetCore": "1.0.0.0"
         },
         "runtime": {
           "RageCoop.ResourceBuilder.dll": {}
         }
       },
+      "DiscUtils.Core/0.16.13": {
+        "dependencies": {
+          "DiscUtils.Streams": "0.16.13",
+          "System.Security.AccessControl": "5.0.0"
+        },
+        "runtime": {
+          "lib/net5.0/DiscUtils.Core.dll": {
+            "assemblyVersion": "0.16.0.0",
+            "fileVersion": "0.16.13.55129"
+          }
+        }
+      },
+      "DiscUtils.Iso9660/0.16.13": {
+        "dependencies": {
+          "DiscUtils.Core": "0.16.13"
+        },
+        "runtime": {
+          "lib/net5.0/DiscUtils.Iso9660.dll": {
+            "assemblyVersion": "0.16.0.0",
+            "fileVersion": "0.16.13.55129"
+          }
+        }
+      },
+      "DiscUtils.Streams/0.16.13": {
+        "runtime": {
+          "lib/net5.0/DiscUtils.Streams.dll": {
+            "assemblyVersion": "0.16.0.0",
+            "fileVersion": "0.16.13.55129"
+          }
+        }
+      },
+      "Microsoft.NETCore.Platforms/5.0.0": {},
       "Newtonsoft.Json/13.0.1": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -34,11 +70,34 @@
           }
         }
       },
-      "RageCoop.Client/1.5.2.121": {
+      "System.Security.AccessControl/5.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0",
+          "System.Security.Principal.Windows": "5.0.0"
+        }
+      },
+      "System.Security.Principal.Windows/5.0.0": {},
+      "LemonUI.SHVDNC/1.5.1.0": {
         "runtime": {
-          "RageCoop.Client.dll": {
-            "assemblyVersion": "1.5.2.121",
-            "fileVersion": "1.5.2.121"
+          "LemonUI.SHVDNC.dll": {
+            "assemblyVersion": "1.5.1.0",
+            "fileVersion": "1.5.1.0"
+          }
+        }
+      },
+      "Lidgren.Network/2012.1.7.0": {
+        "runtime": {
+          "Lidgren.Network.dll": {
+            "assemblyVersion": "2012.1.7.0",
+            "fileVersion": "2012.1.7.0"
+          }
+        }
+      },
+      "RageCoop.Client.Scripting/1.0.0.0": {
+        "runtime": {
+          "RageCoop.Client.Scripting.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -50,19 +109,19 @@
           }
         }
       },
-      "RageCoop.Server/1.5.2.104": {
+      "RageCoop.Server/1.6.0.38": {
         "runtime": {
           "RageCoop.Server.dll": {
-            "assemblyVersion": "1.5.2.104",
-            "fileVersion": "1.5.2.104"
+            "assemblyVersion": "1.6.0.38",
+            "fileVersion": "1.6.0.38"
           }
         }
       },
-      "LemonUI.SHVDN3/1.7.0.0": {
+      "ScriptHookVDotNetCore/1.0.0.0": {
         "runtime": {
-          "LemonUI.SHVDN3.dll": {
-            "assemblyVersion": "1.7.0.0",
-            "fileVersion": "1.7.0.0"
+          "ScriptHookVDotNetCore.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -73,6 +132,34 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "DiscUtils.Core/0.16.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TU/Ns5RMa3060K7AsSDqG94/H7eaWaz1XoYuCUur40Mg+t0/ubtKqxCffkoiB1e/cFMGvHL0evFoY6uDL9Ocmw==",
+      "path": "discutils.core/0.16.13",
+      "hashPath": "discutils.core.0.16.13.nupkg.sha512"
+    },
+    "DiscUtils.Iso9660/0.16.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hT0DbN+sIqg5Bu3/sCQUuKLwIrceF9BZvn7AeRe+f2iY0p4mgN9xEmXpFWQshnBBxN9r75364agBHDeb5owiUA==",
+      "path": "discutils.iso9660/0.16.13",
+      "hashPath": "discutils.iso9660.0.16.13.nupkg.sha512"
+    },
+    "DiscUtils.Streams/0.16.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BSrywAX2mmvt6j00u6VQYQLtxc6jDniK2aP4p0q20bbTGXImtW4N26eUZYKfkW9aj6XLaqISFgtWfssKURixeA==",
+      "path": "discutils.streams/0.16.13",
+      "hashPath": "discutils.streams.0.16.13.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
+      "path": "microsoft.netcore.platforms/5.0.0",
+      "hashPath": "microsoft.netcore.platforms.5.0.0.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.1": {
       "type": "package",
@@ -88,7 +175,31 @@
       "path": "sharpziplib/1.3.3",
       "hashPath": "sharpziplib.1.3.3.nupkg.sha512"
     },
-    "RageCoop.Client/1.5.2.121": {
+    "System.Security.AccessControl/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dagJ1mHZO3Ani8GH0PHpPEe/oYO+rVdbQjvjJkBRNQkX4t0r1iaeGn8+/ybkSLEan3/slM0t59SVdHzuHf2jmw==",
+      "path": "system.security.accesscontrol/5.0.0",
+      "hashPath": "system.security.accesscontrol.5.0.0.nupkg.sha512"
+    },
+    "System.Security.Principal.Windows/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-t0MGLukB5WAVU9bO3MGzvlGnyJPgUlcwerXn1kzBRjwLKixT96XV0Uza41W49gVd8zEMFu9vQEFlv0IOrytICA==",
+      "path": "system.security.principal.windows/5.0.0",
+      "hashPath": "system.security.principal.windows.5.0.0.nupkg.sha512"
+    },
+    "LemonUI.SHVDNC/1.5.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Lidgren.Network/2012.1.7.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RageCoop.Client.Scripting/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -98,12 +209,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "RageCoop.Server/1.5.2.104": {
+    "RageCoop.Server/1.6.0.38": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "LemonUI.SHVDN3/1.7.0.0": {
+    "ScriptHookVDotNetCore/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

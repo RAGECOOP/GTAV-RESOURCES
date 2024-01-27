@@ -1,11 +1,9 @@
-using System;
-using System.Net;
+using LiteDB;
 using Newtonsoft.Json;
 using RageCoop.Core;
-using LiteDB;
-using JsonWriter= Newtonsoft.Json.JsonWriter;
 using JsonReader = Newtonsoft.Json.JsonReader;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
+using JsonWriter = Newtonsoft.Json.JsonWriter;
 
 namespace RageCoop.Resources.Management
 {
@@ -15,21 +13,21 @@ namespace RageCoop.Resources.Management
 		private readonly ILiteCollection<Member> _members;
 		private readonly ILiteCollection<BanRecord> _banned;
 		public Config Config { get; set; }
-		public ManagementStore(string dataFolder,Logger logger)
+		public ManagementStore(string dataFolder, Logger logger)
 		{
 			var configPath = Path.Combine(dataFolder, "Config.json");
-            if (!File.Exists(configPath))
-            {
+			if (!File.Exists(configPath))
+			{
 				Config = new Config();
 				File.WriteAllText(configPath, JsonConvert.SerializeObject(Config, Formatting.Indented));
 			}
-            else
-            {
+			else
+			{
 				try
 				{
 					Config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(configPath));
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 					logger.Warning("Failed to parse Config.json, overwritting with default values");
 					logger.Error(ex);
@@ -37,17 +35,17 @@ namespace RageCoop.Resources.Management
 					File.WriteAllText(configPath, JsonConvert.SerializeObject(Config, Formatting.Indented));
 				}
 			}
-			if(File.Exists(Path.Combine(dataFolder, "Members.db")))
-            {
+			if (File.Exists(Path.Combine(dataFolder, "Members.db")))
+			{
 				logger?.Warning($"You're using legacy databse system that's no longer supported, please migrate your data and delete \"{Path.Combine(dataFolder, "Members.db")}\"");
-            }
+			}
 			_db = new LiteDatabase(@$"Filename={Path.Combine(dataFolder, "ManagementStore.db")}; Connection=Shared;");
 			_members = _db.GetCollection<Member>();
 			_banned = _db.GetCollection<BanRecord>();
-            if (_members.Count() == 0)
-            {
+			if (_members.Count() == 0)
+			{
 				UpdateMember("Sausage", "FB6F796DFD477E6361A19057EE0235E88820060EC786343229B4D839C01B47C3", "Admin");
-            }
+			}
 		}
 		public string GetBanned(string ip)
 		{
@@ -60,26 +58,26 @@ namespace RageCoop.Resources.Management
 		public bool UpdateMember(string username, string passHash, string role)
 		{
 			var m = new Member() { Username = username.ToLower(), PassHash = passHash, Role = role };
-            if (_members.Update(m))
-            {
+			if (_members.Update(m))
+			{
 				return true;
-            }
+			}
 			_members.Insert(m);
 			return false;
 		}
 		public bool SetRole(string username, string role)
-        {
-			var m=_members.Query().Where(x => x.Username.ToLower()==username.ToLower()).FirstOrDefault();
-            if (m!=null)
-            {
+		{
+			var m = _members.Query().Where(x => x.Username.ToLower() == username.ToLower()).FirstOrDefault();
+			if (m != null)
+			{
 				m.Role = role;
 				_members.Update(m);
 				return true;
-            }
+			}
 			return false;
 		}
 		public bool RemoveMember(string username)
-        {
+		{
 			return _members.Delete(_members.FindOne(x => x.Username.ToLower() == username.ToLower()).Id);
 		}
 		public bool Ban(string ip, string username, string reason = "Unspecified")
@@ -89,25 +87,25 @@ namespace RageCoop.Resources.Management
 			if (m != null)
 			{
 				m.Username = username.ToLower();
-				m.Reason= reason;
+				m.Reason = reason;
 				_banned.Update(m);
 				return false;
 			}
-            else
-            {
-				_banned.Insert(new BanRecord() { Username = username.ToLower(), Address=ip,Reason=reason});
+			else
+			{
+				_banned.Insert(new BanRecord() { Username = username.ToLower(), Address = ip, Reason = reason });
 				return true;
-            }
+			}
 		}
-		public void Unban(string ipOrUserName,out List<string> unbanned)
+		public void Unban(string ipOrUserName, out List<string> unbanned)
 		{
-			unbanned= new List<string>();
-			var records = _banned.Find(x=>x.Username.ToLower()==ipOrUserName.ToLower()||x.Address.ToLower()==ipOrUserName.ToLower());
+			unbanned = new List<string>();
+			var records = _banned.Find(x => x.Username.ToLower() == ipOrUserName.ToLower() || x.Address.ToLower() == ipOrUserName.ToLower());
 			foreach (var record in records)
-            {
+			{
 				_banned.Delete(record.Id);
 				unbanned.Add(record.Username);
-            }
+			}
 		}
 
 		public void Dispose()
@@ -140,7 +138,7 @@ namespace RageCoop.Resources.Management
 		Kick = 1 << 1,
 		Ban = 1 << 2,
 		Register = 1 << 3,
-		All = Kick|Ban|Register
+		All = Kick | Ban | Register
 	}
 	public class Config
 	{

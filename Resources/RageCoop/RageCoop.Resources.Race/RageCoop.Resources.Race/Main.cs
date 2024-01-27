@@ -1,10 +1,10 @@
-﻿using System.Xml.Serialization;
-using GTA.Math;
+﻿using GTA.Math;
 using GTA.Native;
+using LiteDB;
+using RageCoop.Resources.Race.Objects;
 using RageCoop.Server;
 using RageCoop.Server.Scripting;
-using RageCoop.Resources.Race.Objects;
-using LiteDB;
+using System.Xml.Serialization;
 
 namespace RageCoop.Resources.Race
 {
@@ -19,7 +19,7 @@ namespace RageCoop.Resources.Race
         private static LiteDatabase DB;
         private static ILiteCollection<Record> Records;
         private Thread RankingThread;
-        private static bool Stopping = false; 
+        private static bool Stopping = false;
 
         public override void OnStart()
         {
@@ -43,14 +43,14 @@ namespace RageCoop.Resources.Race
             Session.State = State.Voting;
             Session.Votes = new Dictionary<Client, string>();
             Session.Players = new List<Player>();
-            if (GetMaps().Length== 0)
+            if (GetMaps().Length == 0)
             {
                 Logger.Warning("No maps found, applying default maps");
-                foreach(var file in CurrentResource.Files.Values)
+                foreach (var file in CurrentResource.Files.Values)
                 {
                     if (file.Name.StartsWith("Maps") && file.Name.EndsWith(".xml") && !file.IsDirectory)
                     {
-                        var target = File.Create(Path.Combine(CurrentResource.DataFolder,file.Name));
+                        var target = File.Create(Path.Combine(CurrentResource.DataFolder, file.Name));
                         file.GetStream().CopyTo(target);
                         target.Close();
                         target.Dispose();
@@ -72,16 +72,16 @@ namespace RageCoop.Resources.Race
                 {
                     try
                     {
-                        if (Session.State==State.Started)
+                        if (Session.State == State.Started)
                         {
                             Session.Rank();
                             foreach (var p in Session.Players)
                             {
-                                p.Client.SendCustomEvent(Events.PositionRanking, p.Ranking,(ushort)Session.Players.Count);
+                                p.Client.SendCustomEvent(Events.PositionRanking, p.Ranking, (ushort)Session.Players.Count);
                             }
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         CurrentResource.Logger.Error(ex);
                     }
@@ -95,7 +95,7 @@ namespace RageCoop.Resources.Race
 
         public override void OnStop()
         {
-            Stopping=true;
+            Stopping = true;
             DB.Dispose();
             RankingThread.Join();
             CurrentResource.Logger.Info($"Race resource stopped");
@@ -127,14 +127,14 @@ namespace RageCoop.Resources.Race
                 Session.Map = Maps.First(x => x.Name == map);
                 API.SendChatMessage("Map: " + map);
                 var record = GetRecord(map);
-                if (record!=null)
+                if (record != null)
                     API.SendChatMessage($"Record: {TimeSpan.FromMilliseconds(record.Time):m\\:ss\\.ff} by {record.Player}");
 
                 foreach (var prop in Session.Map.DecorativeProps)
                 {
                     var p = API.Entities.CreateProp(prop.Hash, prop.Position, prop.Rotation);
                     if (prop.Texture > 0 && prop.Texture < 16)
-                        API.SendNativeCall(null, Hash._SET_OBJECT_TEXTURE_VARIATION, p.Handle, prop.Texture);
+                        API.SendNativeCall(null, Hash.SET_OBJECT_TINT_INDEX, p.Handle, prop.Texture);
                 }
 
                 Checkpoints.Clear();
@@ -189,7 +189,7 @@ namespace RageCoop.Resources.Race
                         if (Session.Players.Count > 1)
                             msg += $" ({Wins(player.Client.Username) + 1} wins)";
                         API.SendChatMessage(msg);
-                        SaveTime(Session.Map.Name, player.Client.Username, time, Session.Players.Count > 1 );
+                        SaveTime(Session.Map.Name, player.Client.Username, time, Session.Players.Count > 1);
                     }
                 }
             }
@@ -213,7 +213,7 @@ namespace RageCoop.Resources.Race
                 try
                 {
                     var cayo = Session.Map.SpawnPoints[0].Position.DistanceTo2D(new Vector2(4700f, -5145f)) < 2000f;
-                    client.SendNativeCall(Hash._SET_ISLAND_HOPPER_ENABLED, "HeistIsland", cayo);
+                    client.SendNativeCall(Hash.SET_ISLAND_ENABLED, "HeistIsland", cayo);
                     var position = Session.Map.SpawnPoints[spawnPoint % Session.Map.SpawnPoints.Length].Position;
                     var heading = Session.Map.SpawnPoints[spawnPoint % Session.Map.SpawnPoints.Length].Heading;
                     client.Player.Position = position + new Vector3(4, 0, 1);
@@ -221,7 +221,7 @@ namespace RageCoop.Resources.Race
                     var vehicle = API.Entities.CreateVehicle(client, player.VehicleHash, position, heading);
                     Thread.Sleep(1000);
                     client.SendNativeCall(Hash.SET_PED_INTO_VEHICLE, client.Player.Handle, vehicle.Handle, -1);
-                    client.SendNativeCall(Hash._SET_AI_GLOBAL_PATH_NODES_TYPE, cayo);
+                    client.SendNativeCall(Hash.SET_ALLOW_STREAM_HEIST_ISLAND_NODES, cayo);
                     client.SendCustomEvent(Events.StartCheckpointSequence, Checkpoints.ToArray());
                     if (Session.State == State.Started)
                     {
@@ -231,7 +231,7 @@ namespace RageCoop.Resources.Race
                     else
                         vehicle.Freeze(true);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Logger.Error("[Race.Join]", ex);
                 }
@@ -327,7 +327,7 @@ namespace RageCoop.Resources.Race
             return Maps[Random.Next(Maps.Count)].Name;
         }
 
-        private static void SaveTime(string race, string player, long time,bool win)
+        private static void SaveTime(string race, string player, long time, bool win)
         {
             Records.Insert(new Record()
             {

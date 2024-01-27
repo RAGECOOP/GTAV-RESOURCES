@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="RageCoop.Core">
+			<HintPath>..\..\..\..\RageCoop.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="RageCoop.Server">
+			<HintPath>..\..\..\..\RageCoop.Server.dll</HintPath>
+		</Reference>
+		<Reference Include="ScriptHookVDotNetCore">
+			<HintPath>..\..\..\..\ScriptHookVDotNetCore.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>

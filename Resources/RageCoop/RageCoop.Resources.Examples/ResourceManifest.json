@@ -1,0 +1,6 @@
+{
+  "Name": "RageCoop.Resources.Examples",
+  "Description": "Example server and client resources",
+  "ClientResources": ["RageCoop.Resources.Examples.Client/RageCoop.Resources.Examples.Client.csproj"],
+  "Version": "0.1"
+}
